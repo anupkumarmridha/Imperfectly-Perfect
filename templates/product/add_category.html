@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Add Category{% endblock title %}
+{% block blogactive %}active{% endblock blogactive %}
+{% block body %}
+{% if user.is_authenticated %}
+<h1>Add Category...</h1>
+    <br/><br/>
+<div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+        <button class="btn btn-warning">ADD</button>
+    </form>
+</div>
+
+{% else %}
+You are Not allowed here
+{% endif %}
+{% endblock body %}

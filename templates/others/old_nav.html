@@ -1,0 +1,100 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Bid N' Build</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item ">
+                  <a class="nav-link {% block homeactive %}{% endblock homeactive %} " aria-current="page" href="/">Home</a>
+                </li>
+
+
+                {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                
+                <li class="nav-item ">
+                  <a class="nav-link {% block blogactive %}{% endblock blogactive %}" href="Add_Product">Add Product</a>
+                </li>
+                
+                {% comment %} {% endif %} {% endcomment %}
+                
+                <li class="nav-item ">
+                  <a class="nav-link {% block aboutactive %}{% endblock aboutactive %}" href="/about">About Us</a>
+                </li>
+                 <li class="nav-item ">
+                  <a class="nav-link {% block contactactive %}{% endblock contactactive %}" href="/contact">Contact Us</a>
+                </li>
+              </ul>
+
+            <div class="ml auto form-inline">
+                <form method="get" action="/search" class=" my-2 mx-3 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                        name="query" id="query">
+                    <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+                <!--Categories-->
+                {% comment %} {% if cats_menu %} {% endcomment %}
+                <li class="nav-item dropdown">
+                  <button class="btn btn-secondary dropdown-toggle mr-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categories
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  
+                    {% comment %} {% for cats in cats_menu %} {% endcomment %}
+                  {% comment %} <li><a class="dropdown-item" href="{% url 'category' cats|slugify %}">{{ cats }}</a> </li> {% endcomment %}
+                  {% comment %} {% endfor %} {% endcomment %}
+      
+                </ul>
+                </li>
+                
+                {% comment %} {% else %} {% endcomment %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  {% comment %} <a class="nav-link" href="{% url 'category_list' %}">Categories</a> {% endcomment %}
+                </li>
+              </ul>
+                {% comment %} {% endif %} {% endcomment %}
+                <!--End Categories-->
+
+                <!-- <a href="/admin" role="button" target="_blank" class="btn btn-outline-success m-2 my-sm-0">Admin Panel</a>-->
+                {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                <ul class="navbar-nav mr-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% comment %} Logged in as {{request.user}} {% endcomment %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <form action='/logout' method='post'>
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="hidden" name="value">
+                                </div>
+
+                                <button class="dropdown-item" type="submit">Logout</button>
+                            </form>
+                            {% comment %} <a class="dropdown-item" href="{% url 'View_Profile' user.pk %}">View Profile</a> {% endcomment %}
+                        </div>
+                    </li>
+                </ul>
+
+                {% comment %} {% else %} {% endcomment %}
+                <!-- Button to trigger login modal -->
+                <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#loginModal">
+                    Login
+                </button>
+                <!-- Button to trigger singup modal -->
+                <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#singupModal">
+                    Sing Up
+                </button> 
+                
+                {% comment %} {% endif %} {% endcomment %}
+            
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.title }}{% endblock title %}
+{% block body %}
+<div class="container my-5">
+    <h2 class="text-center">{{ product.title }}</h2>
+
+
+<small>
+    By: {{ product.author.user.username }}
+    {% if product.author.profile_pic %}
+    <img src="{{ product.author.profile_pic.url }}" class="rounded-circle"  width=75 height=75>
+
+    {% else %}
+    
+        <img src="{% static 'img/avatar.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
+        
+    {% endif %}
+    <br> 
+    Tag: {{ product.category }} 
+    <br>
+    Posted : {{ product.created_at }} <br>Last update : {{ product.updated_at }}
+    <br>
+</small>
+
+<hr>
+{% if product_image.url %}
+<img src=" {{ product.product_image.url }} ">
+{% endif %}
+<br>
+
+{{ product.desc|safe }}
+
+<br>
+<hr>
+
+<!--This is for Bid Price-->
+<small> Price {{ product.price }} Rs </small>
+<br>
+<small> Total Bids {{ product.bids.all.count }} </small>
+<br>
+    {% if not product.bids.all %}
+    
+    
+    <small>Make Your First Bid</small>
+
+    {% else %}
+  
+    {% for bid in product.bids.all  %}
+    <small> Last bid: {{ bid.bid_price }} </small>
+    {% endfor %}
+    {% endif %}
+
+{% if user.is_authenticated %}
+    <small> 
+                    {% comment %} <div class="form-group">
+                        <form action="{% url 'bid_product' product.pk %}" method="POST" >
+                            {% csrf_token %}
+                                <input type="hidden" name="productId" value="{{ product.pk }}">
+                                <label for="bid_product">Bid Product</label>
+                                    <input type="number" class="col-form-label" id="bid_price" min="{{ product.price }} " name="bid_price" placeholder="Bid The Product"></input>
+                           
+                                <small><button class="btn btn-warning sm sm mr-2">Bid Product</button>
+                                </small>
+                            </form>
+                    </div> {% endcomment %}
+                    {% else %}
+
+                    <div class="form-group">
+                        <form>
+                            <label for="bid_product">Bid Product</label>
+                                    <input type="number" class="col-form-label" id="bid_price" min="{{ product.price }}" name="bid_price" placeholder="Bid The Product"></input>
+                                <small>
+                                    <button type="button" class="btn btn-primary sm mr-2" data-toggle="modal" data-target="#loginModal">Bid Product</button> 
+                                </small>
+                            
+                        </form>
+                    </div>
+    </small>
+{% endif %}
+</div>
+{% endblock body %}

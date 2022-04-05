@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}DELETE PRODUCT{% endblock title %}
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.customer.id == product.author.id %}
+<div class="container">
+    <div class="row gap-3 justify-content-around">
+        <h1 class="text-center">Delete Product : {{ product.title }}</h1>
+        <br /><br />
+        <h3>Posted on : {{ product.created_at }}</h3>
+        
+        <h6 class="mb-0">{{ product.desc | slice:':250' | safe }}
+
+            <a href=" {% url 'product_details' product.pk %}">View Product</a>
+
+          </h6>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                <strong>Are you Sure to Delete!!</strong><br><br>
+                <button class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% else %}
+You are Not allowed here
+{% endif %}
+
+{% else %}
+You are Not allowed here
+{% endif %}
+{% endblock body %}

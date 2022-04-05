@@ -1,0 +1,75 @@
+
+{% load static %}
+
+<div class="modal fade" id="singupModal" tabindex="-1" role="dialog" aria-labelledby="singupModal"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="singupModalTitle">SingUp Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action='{% url 'handelSingup' %}' method='post'>
+                    <div class="form-group">
+                        <select class="form-select" name="user_type" aria-label="Default select example">
+                            <option selected>SignUp as a</option>
+                            <option value="2">Customer</option>
+                            <option value="3">Company</option>
+                          </select>
+                      </div>
+                      
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="choos a uniq username">
+                      </div>
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name"
+                            autocomplete="fname" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name"
+                            autocomplete="lname" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <div class="mx-0">
+                            <div class="col-md-8 px-0">
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="name@example.com" autocomplete="email" required>
+                                <small id="otpMessage" class="form-text"></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pass1">Choose Password</label>
+                        <input type="password" class="form-control" id="pass1" name="pass1"
+                            placeholder="choose your password" autocomplete="pass1" required>
+                        <small id="unamehelp" class="form-text text-muted px-1">
+                            Your password must be at least 8 and less than 20 characters (must have One Uppercase &
+                            one lower case letters, numbers & amp; underscores allowed) with no spaces
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pass2">Confirm Password</label>
+                        <input type="password" class="form-control" id="pass2" name="pass2"
+                            placeholder="Enter your password again" autocomplete="pass2" required>
+                    </div>
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">SingUp</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

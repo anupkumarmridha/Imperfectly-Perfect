@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}categories{% endblock title %}
+{% block body %}
+<h1>categories</h1>
+{% for cats in cats_menu %}
+    {% comment %} <h3><a class="dropdown-item" href="{% url 'category' cats|slugify %}">{{ cats }}</a></h3> {% endcomment %}
+    <h3><a class="dropdown-item" href="#">{{ cats }}</a></h3>
+{% endfor %}
+{% endblock body %}

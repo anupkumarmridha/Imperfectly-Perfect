@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}info{% endblock title %}
+{% block body %}
+
+<!-- -----------------------------------Product requirement Modal start----------------------------------- -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="{{product.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="card m-auto" style="width: 18rem;">
+              <img src=" {{ product.image_url|default_if_none:'#' }} " class="card-img-top" alt="..." width="320" height="180">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.title }}</h5>
+                  <p class="card-text">{{ product.desc | slice:':100' | safe }}</p>
+                </div>
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Budget: 
+                  <span class="badge bg-success rounded-pill">{{ product.price }}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Due Date:
+                  <span class="badge bg-primary rounded-pill">12th Dec 2022</span>
+                  </li>
+              </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock body %}

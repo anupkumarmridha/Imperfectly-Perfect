@@ -1,14 +1,16 @@
 from email.mime import message
+from logging import exception
 from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
 from django.urls import is_valid_path
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from account.models import Company, Customer
-from home.models import Category, Product,Bid
+from home.models import AcceptBid, Category, Product,Bid
 from home.forms import PostProductForm, EditProductForm
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
+from account import views
 
 # category
 context={}
@@ -173,6 +175,25 @@ def add_bid(request):
     else:
         messages.error(request, "Invalid Method!")
         return redirect('all_product_details')
+
+def accept_bid(request,pk):
+    
+    bid=Bid.objects.get(id=pk)
+    
+    print(bid.product)
+    print(bid.product.author)
+    print(bid.company)
+    try:
+        accepted_bid=AcceptBid()
+        accepted_bid.bid=bid
+        # set product order=true
+        product=Product.objects.get(id=bid.product.id)
+        product.order=True
+        accepted_bid.save()
+        product.save()
+    except exception as e:
+        print(e)
+    return redirect('bid_details')
 
 def company_rating(request, pk):
     pass

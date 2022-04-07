@@ -33,6 +33,7 @@ urlpatterns = [
 
 #end point for bids
     path('add-bid', views.add_bid, name='add_bid'),
+    path('accept-bid/<int:pk>', views.accept_bid, name='accept_bid'),
 #end point for comments
 
     path('add-comment', views.add_comment, name='add_comment'),

@@ -9,6 +9,10 @@
     <div class="container">
         <div class="row gap-3 justify-content-around">
           {% for product in all_products %}
+            {% if product.order %}
+              
+            {% else %}
+            
               <div class="card col-3 m-4" style="width: 18rem;">
                 {% if product.product_image %}
                   <img src=" {{ product.image_url|default_if_none:'#' }} " class="card-img-top p-2" alt="..." width="320" height="180">
@@ -62,7 +66,8 @@
                   </div>
 
               </div>
-              
+
+              {% endif %}
             {% endfor %}
 
 

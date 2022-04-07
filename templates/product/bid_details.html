@@ -27,8 +27,14 @@
                           <p class="d-inline">Price : {{bid.bid_price}} 
 
                             Company: <a href="{% url 'company_details' bid.company.pk %}"> {{bid.company}} </a></p>
-                          <button type="button" class="btn-sm btn-success">Accept</button>
-                          <button type="button" class="btn-sm btn-danger">Decline</button>
+                            {% if bid.product.order %}
+                            <p>Offer Acepted</p>
+                            {% else %}
+                            <a href="{% url 'accept_bid' bid.pk %}" type="button" class="btn-sm btn-success">Accept</a>
+                            <button type="button" class="btn-sm btn-danger">Decline</button>
+
+                          {% endif %}
+
                         </div>
                         
                         {% comment %} <div class="bid-details my-1">

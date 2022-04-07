@@ -15,7 +15,7 @@ class Product(models.Model):
     title=models.CharField(max_length=255)
     
     author=models.ForeignKey(Customer, on_delete=models.CASCADE)
-    
+    order=models.BooleanField(default=False)
     product_image = models.ImageField(null=True, blank=True, upload_to='images/products/')
     
     desc=RichTextField(blank=True, null=True)
@@ -59,7 +59,8 @@ class Bid(models.Model):
 
 class AcceptBid(models.Model):
     bid=models.ForeignKey(Bid, on_delete=models.CASCADE)
-    author = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.bid.product)
     
 
 class Rating(models.Model):

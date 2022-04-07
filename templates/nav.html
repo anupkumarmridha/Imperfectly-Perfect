@@ -30,7 +30,7 @@
             
             {% if user.is_authenticated %}
 
-              {% if user.user_type == '2'  %}
+              {% if user.user_type == '2' or user.user_type == '1' %}
               <li class="nav-item">
                 <a class="nav-link {% block addProductActive %}{% endblock addProductActive %}" href="{% url 'add_product' %}">Add Product</a>
               </li>
@@ -60,7 +60,7 @@
               </ul>
              
             </li>
-              {% if user.user_type == '3'  %}
+              {% if user.user_type == '3' or user.user_type == '1' %}
               <li class="nav-item">
                 <a class="nav-link {% block mywinactive %}{% endblock mywinactive %}" aria-current="page" href="{% url 'my_win_products' %}">My Winings</a>
               </li>

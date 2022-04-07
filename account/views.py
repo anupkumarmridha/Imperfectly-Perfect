@@ -8,7 +8,13 @@ from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 # from account.forms import AddCustomerForm
 from home import views 
+from home.models import Product,Category
 # Create your views here.
+
+# category
+context={}
+cats_menu=Category.objects.all()
+context['cats_menu']=cats_menu
 
 def admin_home(request):
     return render(request, 'users/admin/admin_home.html')
@@ -228,5 +234,16 @@ def delete_company_profile(request,id):
 
 # ........................my win product list for company.................#
 
-def my_win_products(request):
-    return render(request, 'users/company/my_win_product.html')
+def win_products_list(request):
+    all_products=Product.objects.all()
+    context={
+        'all_products':all_products
+    }
+    return render(request, 'users/company/win_products_list.html',context)
+
+def bid_products_list(request):
+    all_products=Product.objects.all()
+    context={
+        'all_products':all_products
+    }
+    return render(request, 'users/company/bid_products_list.html',context)

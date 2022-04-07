@@ -64,6 +64,9 @@
               <li class="nav-item">
                 <a class="nav-link {% block mywinactive %}{% endblock mywinactive %}" aria-current="page" href="{% url 'my_win_products' %}">My Winings</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link {% block mybidsactive %}{% endblock mybidsactive %}" aria-current="page" href="{% url 'bid_products_list' %}">My Bids Products</a>
+              </li>
 
               {% endif %}
             {% endif %}

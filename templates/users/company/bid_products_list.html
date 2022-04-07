@@ -1,0 +1,161 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}My Bids{% endblock title %} 
+{% block productactive %} active {% endblock productactive %}
+
+{% block body %}
+
+    <!-- -----------------------------------Product list start----------------------------------- -->
+    <div class="container">
+        <div class="row gap-3 justify-content-around">
+          {% for product in all_products %}
+            {% if product.order %}
+              
+            {% else %}
+            {% for bid in product.bids.all %}                
+                  {% if bid.company.user.id == user.id %}
+                      <div class="card col-3 m-4" style="width: 18rem;">
+                         
+                          {% if product.product_image %}
+                          <img src=" {{ product.image_url|default_if_none:'#' }} " class="card-img-top p-2" alt="..." width="320" height="180">
+                          {% else %}
+                          <img src="{% static 'img/product.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
+                          {% endif %}
+                          <div class="card-body">
+                          <h5 class="card-title">{{ product.title }}</h5>
+                          <p class="card-text">{{ product.desc | slice:':100' | safe }}
+
+                          <a href=" {% url 'product_details' product.pk %}">View Product</a>
+                          </p>
+              
+                          
+                          </div>
+                          <ul class="list-group">
+                              <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Author
+                              <span class="badge bg-success rounded-pill">{{ product.author }}</span>
+                              </li>
+
+                              <li class="list-group-item d-flex justify-content-between align-items-center">
+                              
+                              Budget:
+                              
+                  
+                              <span class="badge bg-success rounded-pill">₹ {{ product.price }}</span>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Your Bid Price:
+                              <span class="badge bg-success rounded-pill">₹ {{ bid.bid_price }}</span>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Category:
+                              <span class="badge bg-primary rounded-pill">Clothings</span>
+                              </li>
+                          </ul>
+                          
+                          <div class="card-bodyjustify-content-around ">
+                              <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}">
+                              Info
+                              </button>
+                              {% if user.is_authenticated %}
+                              {% if user.company %}
+                              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}">
+                                  Submit Bid
+                              </button>
+                              {% endif %}
+                              {% else %}
+                              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                  Submit Bid
+                              </button>
+                          {% comment %} {% endif %} {% endcomment %}
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% endif %}
+                
+                {% endfor %}
+              {% endif %}
+            
+            {% endfor %}
+
+
+            
+
+    <!-- -----------------------------------Product list end----------------------------------- -->
+
+
+    <!-- -----------------------------------Bid Modal start----------------------------------- -->
+{% for product in all_products %}
+    <!-- Modal -->
+  
+    
+    
+   
+  <!-- -----------------------------------Bid Modal end----------------------------------- -->
+
+  <div class="modal fade" id="productbid_{{product.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Place your bid</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action='{% url 'add_bid' %}' method='post'>
+          {% csrf_token %}
+          <div class="modal-body">
+            
+            
+              
+              <input type="text" class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
+              <input type="text" class="form-control" id="com_user_id" name="com_user_id" value="{{ user.company.id }}" placeholder="{{ user.company.id }}">
+              <input type="number" name="bid_price" class="form-control" placeholder="Enter your bid">
+            
+          
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- -----------------------------------Product requirement Modal start----------------------------------- -->
+    <!-- Modal -->
+    <div class="modal fade" id="product_{{product.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card m-auto" style="width: 18rem;">
+              {% if product.product_image %}
+                  <img src=" {{ product.image_url|default_if_none:'#' }} " class="card-img-top p-2" alt="..." width="320" height="180">
+                  {% else %}
+                  <img src="{% static 'img/product.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
+                  {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title">{{product.title}}</h5>
+                  <p class="card-text"><p class="card-text">{{ product.desc | safe }}</p>
+                </div>
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                Budget:
+                <span class="badge bg-success rounded-pill">₹{{product.price}} </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                Due Date:
+                <span class="badge bg-primary rounded-pill">12th Dec 2022</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% endblock body %}

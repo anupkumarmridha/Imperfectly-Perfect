@@ -34,5 +34,6 @@ urlpatterns = [
   path("delete-company-profile/<int:id>", views.delete_company_profile, name='delete_company_profile'),
 
   # My winigs product
-  path("my-winings", views.my_win_products, name='my_win_products'),
+  path("my-winings", views.win_products_list, name='my_win_products'),
+  path("my-bids", views.bid_products_list, name='bid_products_list'),
 ]

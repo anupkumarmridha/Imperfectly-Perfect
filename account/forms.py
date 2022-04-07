@@ -1,6 +1,19 @@
 # from django import forms
 # from django.contrib.auth.forms import UserCreationForm
-# from .models import User
+# from account.models import Company,Customer
+
+# class AddCustomerForm(forms.ModelForm):
+#     class Meta:
+#         model=Customer
+#         fields=('user', 'gender', 'dob', 'phone', 'address', 'pin', 'profile_pic')
+#         widgets={
+#             'user': forms.TextInput(attrs={'class': 'form-control','value':'', 'id':'user_id', 'type':'hidden'}),
+#             'gender': forms.Select(attrs={'class': 'form-control',}),
+#             'dob': forms.DateInput(attrs={'class': 'form-control'}),
+#             'phone':forms.NumberInput(attrs={'class':'form-control'}),
+#             'address':forms.TextInput(attrs={'class':'form-control'}),
+#             'pin':forms.TextInput(attrs={'class':'form-control'}),
+#         }
 
 # class LoginForm(forms.Form):
 #     username = forms.CharField(

@@ -21,16 +21,33 @@
               <a class="nav-link {% block registeractive %}{% endblock registeractive %}" href="{% url 'register' %}">Register</a>
             </li> 
             
+
+             {% comment %} <li class="nav-item">
+              <a class="nav-link " href="{% url 'add_customer' %}">add company</a>
+             </li> 
+
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_company' %}">add company</a>
+             </li>  {% endcomment %}
+            
             {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link {% block addProductActive %}{% endblock addProductActive %}" href="{% url 'add_product' %}">Add Product</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {% block CustomerProductsActive %}{% endblock CustomerProductsActive %}" href="{% url 'customer_product_list' user.pk %}">Your Posted Product</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {% block BidDetailsActive %}{% endblock BidDetailsActive %}" href="{% url 'bid_details' %}">Bid Details</a>
-            </li>
+
+              {% if user.user_type == '2'  %}
+              <li class="nav-item">
+                <a class="nav-link {% block addProductActive %}{% endblock addProductActive %}" href="{% url 'add_product' %}">Add Product</a>
+              </li>
+            
+
+              <li class="nav-item">
+                <a class="nav-link {% block CustomerProductsActive %}{% endblock CustomerProductsActive %}" href="{% url 'customer_product_list' user.pk %}">Your Posted Product</a>
+              </li>
+
+              
+              <li class="nav-item">
+                <a class="nav-link {% block BidDetailsActive %}{% endblock BidDetailsActive %}" href="{% url 'bid_details' %}">Bid Details</a>
+              </li>
+              {% endif %}
+
             {% endif %}
 
             <li class="nav-item dropdown">

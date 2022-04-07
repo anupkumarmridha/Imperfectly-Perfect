@@ -27,7 +27,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title + '|' + str( self.author)
+        return self.title + ' | ' + str( self.author)
 
     @property
     def image_url(self):
@@ -35,26 +35,20 @@ class Product(models.Model):
             return self.product_image.url
 
 
-
-    
-class Auction(models.Model):
-    product = models.ForeignKey(Product, related_name="bids", on_delete=models.CASCADE)
-    # number_of_bids = models.IntegerField()
-    time_starting = models.DateTimeField()
-    time_ending = models.DateTimeField()
-
 # class Watchlist(models.Model):
 #     author = models.ForeignKey(Company, on_delete=models.CASCADE)
 #     auction_id = models.ForeignKey(Auction, on_delete=models.CASCADE)
     
 
 class Bid(models.Model):
+    product = models.ForeignKey(Product, related_name="bids", on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
     bid_price=models.DecimalField(max_digits=8, decimal_places=2)         
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return str(self.product) + ' | ' + str( self.company)
 # class Bid(models.Model):
 #     product = models.ForeignKey(Product, related_name="bids", on_delete=models.CASCADE)
 #     company = models.ForeignKey(Company, on_delete=models.CASCADE)  

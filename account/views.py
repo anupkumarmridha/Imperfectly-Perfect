@@ -1,10 +1,12 @@
+from email import message
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse_lazy, reverse
 from account.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
-from account.models import User
+from account.models import Company, Customer, User
 from django.contrib import messages
-
+from django.core.files.storage import FileSystemStorage
+# from account.forms import AddCustomerForm
 from home import views 
 # Create your views here.
 
@@ -16,6 +18,13 @@ def customer_home(request):
     
 def company_home(request):
     return render(request,'users/company/company_home.html')
+
+def company_details(request,pk):
+    company_details=Company.objects.filter(id=pk)
+    context={
+        'company_details':company_details,
+    }
+    return render(request,'users/company/company_details.html',context)
 
 #.............................................registration..............................................#
 
@@ -64,6 +73,7 @@ def handleLogin(request):
         loginusername = request.POST['loginusername']
         loginpassword = request.POST['loginpassword']
         user =EmailBackEnd.authenticate(request, username=loginusername, password=loginpassword)
+        
         if user is not None:
             login(request, user)
             messages.success(request, "Successfuly logged in 🥰")
@@ -76,15 +86,95 @@ def handleLogin(request):
                 return redirect('admin_home')
 
             elif user_type == '2':
-                # return HttpResponse("Student Login")
-                return redirect('customer_home')
+                customer_exist = Customer.objects.filter(user=user).exists()
+                if customer_exist:
+                    messages.success(request,"Customer home !")
+                    return redirect('customer_home')
+
+                return redirect('add_customer')
 
             elif user_type == '3':
-                # return HttpResponse("Student Login")
-                return redirect('company_home')
+                company_exist = Company.objects.filter(user=user).exists()
+                if company_exist:
+                    messages.success(request,"Company Login Successful !")
+                    return redirect('company_home')
+                return redirect('add_company')
         else:
             messages.error(request, "Invalid credentialsl, Please try again 😎")
             return redirect(views.homeView)
+
+def add_customer(request):
+    user=request.user
+    customer_exist = Customer.objects.filter(user=user).exists()
+    if customer_exist:
+        messages.error(request,"Customer Already Registered !")
+        return redirect('customer_home')
+    # customer_form=AddCustomerForm
+    if request.method=='POST':
+        gender=request.POST['gender']
+        dob=request.POST['dob']
+        phone=request.POST['phone']
+        address=request.POST['address']
+        pin=request.POST['pin']
+        profile_pic=request.POST['profile_pic']
+        print(user)
+        try:
+            customer=Customer()
+            customer.user=user
+            customer.gender=gender
+            customer.dob=dob
+            customer.phone=phone
+            customer.address=address
+            customer.pin=pin
+            customer.profile_pic=profile_pic
+            customer.save()
+            messages.success(request,"Successfuly register as a Customer")
+            return redirect('customer_home')
+        except Exception as e:
+            print(e)
+            messages.error(request,e)
+            return redirect('add_customer')
+
+    return render(request, 'users/customer/customer.html')
+
+def add_company(request):
+    user=request.user
+    company_exist = Company.objects.filter(user=user).exists()
+    if company_exist:
+        messages.error(request,"Customer Already Registered !")
+        return redirect('customer_home')
+    # customer_form=AddCustomerForm
+    if request.method=='POST':
+        company_name=request.POST['company_name']
+        cin=request.POST['cin']
+        since=request.POST['since']
+        phone=request.POST['phone']
+        address=request.POST['address']
+        pin=request.POST['pin']
+        company_desc=request.POST['company_desc']
+        # profile_pic=request.POST['profile_pic']
+        profile_pic = request.FILES['profile_pic']
+        print(user)
+        try:
+            company=Company()
+            company.user=user
+            company.company_name=company_name
+            company.cin=cin
+            company.since=since
+            company.phone=phone
+            company.address=address
+            company.pin=pin
+            company.company_desc=company_desc
+            company.profile_pic=profile_pic
+            company.save()
+            messages.success(request,"Successfuly register as a Company")
+            return redirect('company_home')
+        except Exception as e:
+            print(e)
+            messages.error(request,e)
+            return redirect('add_company')
+    return render(request, 'users/company/company.html')
+
 
 def handleLogout(request):
     if request.method=='POST':

@@ -1,6 +1,6 @@
 from dataclasses import fields
 from django import forms
-from home.models import Product,Category, Review
+from home.models import Product,Category, Review, Bid
 
 # choices=Category.objects.all().values_list('name','name')
 # choices_list=[]
@@ -31,4 +31,13 @@ class EditProductForm(forms.ModelForm):
             'desc':forms.TextInput(attrs={'class':'form-control'}),
             'price':forms.TextInput(attrs={'class':'form-control'}),
         }
-        
+
+# class PostBidForm(forms.ModelForm):
+#     class Meta:
+#         model=Bid
+#         fields=('product','company', 'bid_price')
+#         widgets={
+#             'product': forms.TextInput(attrs={'class': 'form-control','value':'', 'id':'user_id'}),
+#             'company': forms.TextInput(attrs={'class': 'form-control','value':'', 'id':'user_id'}),
+#             'bid_price':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter your bid'}),
+#         }

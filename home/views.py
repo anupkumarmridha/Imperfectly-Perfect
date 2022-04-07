@@ -1,13 +1,14 @@
+from email.mime import message
 from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
 from django.urls import is_valid_path
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from account.models import Customer
-from home.models import Category, Product
+from account.models import Company, Customer
+from home.models import Category, Product,Bid
 from home.forms import PostProductForm, EditProductForm
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 
 # category
 context={}
@@ -77,7 +78,17 @@ class ProductDetailsView(DetailView):
     template_name='product/product_details.html'
 
 def all_product_details(request):
-    context["all_products"] = Product.objects.all()
+    all_products=Product.objects.all()
+    # context['all_products']=all_products
+    product_id=request.GET.get('product_id')
+    # all_bids=Bid.objects.all()
+    print(product_id)
+    context={
+        'all_products':all_products,
+        # 'all_bids':all_bids,
+    }
+    for i in context:
+        print(i)
     return render(request,'product/view_all_product.html', context)
 
 
@@ -86,6 +97,10 @@ def customer_product_list(request,pk):
     # print(pk)
     all_posted_product=Product.objects.filter(author=pk).order_by('created_at')
     context['all_posted_product']=all_posted_product
+    
+    # all_bids
+    all_bids=Bid.objects.all()
+
     return render(request,'product/customer_product_list.html',context)
 
 
@@ -129,25 +144,35 @@ def update_comment(request,pk):
 
 def delete_comment(request,pk):
     return render(request,'home/index.html')
-
-# Auction
-def add_auction(request,pk):
-    product=Product.objects.get(id=pk)
-    return render(request,'product/view_all_auction_product.html',context)
-
-def update_auction(request, pk):
-    pass
-
-def delete_auction(request, pk):
-    pass
-
-def bid_auction(request, pk):
-    pass
-
+  
 # Customer product related functionality
 def bid_details(request):
+    pk=Customer.objects.get(user=request.user)
+    all_posted_product=Product.objects.filter(author=pk).order_by('created_at')
+    context={
+        'all_posted_product':all_posted_product,        
+        }
     return render(request,'product/bid_details.html',context)
 
+def add_bid(request):
+    if request.method=='POST':
+        product_id = request.POST.get('product_id')
+        company_id = request.POST.get('com_user_id')
+        bid_price = request.POST['bid_price']
+        try:
+            product=Product.objects.get(pk=product_id)
+            company=Company.objects.get(pk=company_id)
+            bid_model = Bid(product=product, company=company, bid_price=bid_price)
+            bid_model.save()
+            messages.success(request, "Your Bid has successfully added")
+            return redirect('all_product_details')
+        except Exception as e:
+            print(e)
+            messages.error(request, "Failed to Bid the Product!")
+            return redirect('all_product_details')
+    else:
+        messages.error(request, "Invalid Method!")
+        return redirect('all_product_details')
 
 def company_rating(request, pk):
     pass

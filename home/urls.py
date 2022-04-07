@@ -22,12 +22,6 @@ urlpatterns = [
     
     
     path('rating-product/<int:pk>', views.rating_product, name='rating_product'),
-
-# ends point for auction
-    path('add-auction/<int:pk>', views.add_auction, name='add_auction'),
-    path('update-auction/<int:pk>', views.update_auction, name='update_auction'),
-    path('delete-auction<int:pk>', views.delete_auction, name='delete_auction'),
-    path('bid-auction/<int:pk>', views.bid_auction, name='bid_auction'),
     
     path('company_rating/<int:pk>', views.company_rating, name='company_rating'),
 
@@ -37,6 +31,8 @@ urlpatterns = [
     path('update-product/<int:pk>', views.update_product.as_view(), name='update_product'),
     path('Product/Delete/<int:pk>', views.delete_product.as_view(), name='delete_product'),
 
+#end point for bids
+    path('add-bid', views.add_bid, name='add_bid'),
 #end point for comments
 
     path('add-comment', views.add_comment, name='add_comment'),

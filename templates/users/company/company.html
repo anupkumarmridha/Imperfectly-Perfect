@@ -1,0 +1,90 @@
+{% extends 'base.html' %} 
+{% block title %}Home{% endblock title %} 
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block body %} 
+
+    <div class="container mt-2 mb-4">
+        <div class="col-sm-8 ml-auto mr-auto" margin-left="50%" >
+            
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-signin" role="tabpanel"
+                    aria-labelledby="pills-signin-tab">
+                    <div class="col-sm-12 border border-primary shadow rounded pt-2">
+                        <div class="text-center"><h1>Register as a Company</h1></div>
+                        <form action="{% url 'add_company' %}" method="post" enctype="multipart/form-data">
+                           {% csrf_token %}
+                            <div class="form-group">
+                                <label class="font-weight-bold" >Company Name <span class="text-danger">*</span></label>
+                                <input type="text" name="company_name" id="company_name" class="form-control"
+                                    placeholder="Enter your Company Name " required> 
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold" >CIN <span class="text-danger">*</span></label>
+                                <input type="text" name="cin" id="cin" class="form-control"
+                                    placeholder="Enter Your Company Registerd Number" required> 
+                            </div>
+                           
+                            
+                            <div class="form-group">
+                                <label class="font-weight-bold" >Since <span class="text-danger">*</span></label>
+                                <input type="date" name="since" id="since" class="form-control"
+                                placeholder="mm/dd/yyyy" required> 
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Phone-number <span class="text-danger">*</span></label>
+                                <input type="text" name="phone" id="phone" class="form-control"
+                                    placeholder="Enter your valid Phone-number" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Address <span class="text-danger">*</span></label>
+                                <input type="text" name="address" id="address" class="form-control"
+                                    placeholder="Enter your present address" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Pincode <span class="text-danger">*</span></label>
+                                <input type="text" name="pin" id="pin" class="form-control"
+                                    placeholder="Enetr Pin Number" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                
+                                <div class="mb-3">
+                                  <label class="font-weight-bold">Company description<span class="text-danger">*</span></label>
+                                  <textarea class="form-control" name="company_desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                  {% comment %} <input type="text" rows="3" name="cin" id="cin" class="form-control"
+                                  placeholder="Enter Your Company Registerd Number" required>  {% endcomment %}
+                              </div>
+                          </div>
+
+                            <div class="form-group">
+                      
+                                <div class="form-group">
+                                  <label class="font-weight-bold" for="profile_pic">Upload Image</label>
+                                  <input type="file" class="form-control-file"name="profile_pic" id="profile_pic">
+                                </div>
+                    
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" name="submit" class="btn btn-block btn-primary">Submit </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                            
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

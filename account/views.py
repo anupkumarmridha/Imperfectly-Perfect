@@ -97,7 +97,7 @@ def handleLogin(request):
                 company_exist = Company.objects.filter(user=user).exists()
                 if company_exist:
                     messages.success(request,"Company Login Successful !")
-                    return redirect('company_home')
+                    return redirect(views.all_product_details)
                 return redirect('add_company')
         else:
             messages.error(request, "Invalid credentialsl, Please try again 😎")
@@ -116,7 +116,7 @@ def add_customer(request):
         phone=request.POST['phone']
         address=request.POST['address']
         pin=request.POST['pin']
-        profile_pic=request.POST['profile_pic']
+        profile_pic=request.FILES['profile_pic']
         print(user)
         try:
             customer=Customer()

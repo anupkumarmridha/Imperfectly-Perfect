@@ -10,9 +10,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link {% block mywinactive %}{% endblock mywinactive %}" aria-current="page" href="{% url 'my_win_products' %}">My Winings</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link {% block productactive %}{% endblock productactive %}" href="/all-product-details">Listed Product</a>
             </li>
@@ -23,7 +21,7 @@
             
 
              {% comment %} <li class="nav-item">
-              <a class="nav-link " href="{% url 'add_customer' %}">add company</a>
+              <a class="nav-link " href="{% url 'add_customer' %}">add customer</a>
              </li> 
 
              <li class="nav-item">
@@ -48,7 +46,7 @@
               </li>
               {% endif %}
 
-            {% endif %}
+            
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="{% url 'all_category_details' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -62,12 +60,20 @@
               </ul>
              
             </li>
+              {% if user.user_type == '3'  %}
+              <li class="nav-item">
+                <a class="nav-link {% block mywinactive %}{% endblock mywinactive %}" aria-current="page" href="{% url 'my_win_products' %}">My Winings</a>
+              </li>
+
+              {% endif %}
+            {% endif %}
           </ul>
 
-          <form class="d-flex">
+          
+          {% comment %} <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          </form> {% endcomment %}
 
           {% comment %} login signup {% endcomment %}
           {% if user.is_authenticated %}

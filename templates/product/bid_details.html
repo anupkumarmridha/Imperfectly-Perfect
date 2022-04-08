@@ -14,27 +14,44 @@
           <div id="accordion">
             <div class="card">
               {% for product in all_posted_product %}
-
+                
                   <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#product_{{product.pk}}" aria-expanded="true" aria-controls="product_{{product.pk}}">
                     <h5 class="mb-0"></h5>
+                
+                    {% if product.bids.all.count %}
+
+                     <h6 class="mb-0">{{ product.title }}</h6>
+                     {% else %}
                     <h6 class="mb-0">{{ product.title }}</h6>
+                    
+                    <p>The Product Has No Bid</p>
+                    {% endif %}
                   </div>
+                  
+                  
                   {% for bid in product.bids.all %}
                     <div id="product_{{product.pk}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                       <div class="card-body">
                         <div class="bid-details my-1">
+        
                           
-                          <p class="d-inline">Price : {{bid.bid_price}} 
 
-                            Company: <a href="{% url 'company_details' bid.company.pk %}"> {{bid.company}} </a></p>
-                            {% if bid.product.order %}
-                            <p>Offer Acepted</p>
-                            <a href="" type="button" class="btn-sm btn-success">View Order</a>
-                            {% else %}
-                            <a href="{% url 'accept_bid' bid.pk %}" type="button" class="btn-sm btn-success">Accept</a>
-                            <button type="button" class="btn-sm btn-danger">Decline</button>
+                            {% if bid.product.order %}                           
+                                    {% if bid.accepted_bid %}
+                                  <p class="d-inline">Offerd Price : {{bid.bid_price}} 
+                                  Company: <a type="button" class="btn-sm btn-warning" href="{% url 'company_details' bid.company.pk %}"> {{bid.company}} </a></p>
+                                  
+                                    <p>Offer Acepted</p>
+                                    <a href="" type="button" class="btn-sm btn-success">View Order</a>
+                                    {% endif %}
+                              {% else %}
+                              <p class="d-inline">Offerd Price : {{bid.bid_price}} 
+                              Company: <a type="button" class="btn-sm btn-warning" href="{% url 'company_details' bid.company.pk %}"> {{bid.company}} </a></p>
+                              <a href="{% url 'accept_bid' bid.pk %}" type="button" class="btn-sm btn-success">Accept</a>
+                              <button type="button" class="btn-sm btn-danger">Decline</button>
 
-                          {% endif %}
+                            {% endif %}
+                          </p>
 
                         </div>
                         

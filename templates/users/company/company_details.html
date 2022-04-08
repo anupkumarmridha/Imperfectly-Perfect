@@ -5,7 +5,7 @@
 {% block body %} 
 
 
-
+<link rel="stylesheet" href="{% static "css/company_profile_style.css" %}">
 
 <!-- -----------------------------------Profile Section start----------------------------------- -->
 {% for comany in company_details %}
@@ -16,7 +16,7 @@
           <div class="profile-img">
             <!----------company logo---------->
             {% if comany.profile_pic %}
-            <img src="{{comany.profile_pic.url}}" alt="" class="rounded" />
+            <img src="{{comany.profile_pic.url}}" alt="" class="rounded d-md-flex justify-content-md-start" />
             {% else %}
             
                 <img src="{% static 'img/avatar.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
@@ -59,7 +59,7 @@
       
       <div class="row">
         <div class="col-md-4">
-          <div class="p-2  justify-content-around">
+          <div class="p-2 fw-bold d-flex justify-content-around flex-md-column">
             <a><strong>Last Update: <p>10/04/22</p></strong></p>
             <a><strong>Joined: <p>{{comany.created_at}}</p></strong></a>
           </div>

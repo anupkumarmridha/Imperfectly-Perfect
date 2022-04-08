@@ -32,14 +32,20 @@ def add_category(request):
     return render(request,'home/index.html')
 
 def category_details(request,cats):
-    return render(request,'home/index.html')
+    category=Category.objects.get(name=cats)
+    all_cats_product=Product.objects.filter(category=category)
+    context={
+        'all_cats_product':all_cats_product,
+    }
+    return render(request,'product/category_details.html',context)
 
 def all_category_details(request):
     cats_menu=Category.objects.all()
     context={'cats_menu':cats_menu}
-    for i in context:
-        print(i)
-    return HttpResponseRedirect(request.path_info,context)
+    # for i in context:
+    #     print(i)
+    print(request.path_info)
+    return HttpResponseRedirect(request.path_info, context)
 
 def update_category(request,cats):
     return render(request,'home/index.html')

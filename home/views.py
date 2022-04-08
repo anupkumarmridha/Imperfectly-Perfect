@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.urls import is_valid_path
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from account.models import Company, Customer
-from home.models import AcceptBid, Category, Product,Bid
+from home.models import Category, Product,Bid
 from home.forms import PostProductForm, EditProductForm
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
@@ -85,15 +85,17 @@ def all_product_details(request):
     all_products=Product.objects.all()
     # context['all_products']=all_products
     product_id=request.GET.get('product_id')
-    
+    # for i in all_products:
+    #     i.order=False
+    #     i.save()
+
+
     # all_bids=Bid.objects.all()
     print(product_id)
     context={
         'all_products':all_products,
         # 'all_bids':all_bids,
     }
-    for i in context:
-        print(i)
     return render(request,'product/view_all_product.html', context)
 
 
@@ -155,7 +157,7 @@ def bid_details(request):
     pk=Customer.objects.get(user=request.user)
     all_posted_product=Product.objects.filter(author=pk).order_by('created_at')
     context={
-        'all_posted_product':all_posted_product,        
+        'all_posted_product':all_posted_product,             
         }
     return render(request,'product/bid_details.html',context)
 
@@ -165,19 +167,74 @@ def add_bid(request):
         company_id = request.POST.get('com_user_id')
         bid_price = request.POST['bid_price']
         try:
+
             product=Product.objects.get(pk=product_id)
             company=Company.objects.get(pk=company_id)
-            bid_model = Bid(product=product, company=company, bid_price=bid_price)
-            bid_model.save()
-            messages.success(request, "Your Bid has successfully added")
-            return redirect('all_product_details')
+            bid_status=None
+
+            try:
+                try:
+                    bid = Bid.objects.get(product=product, company=company)
+                    bid_status=bid
+                
+                except Exception as e:
+                    messages.error(request,e)
+                if bid_status==None:
+                    try:
+                        bid_model = Bid(product=product, company=company, bid_price=bid_price)
+                        bid_model.save()
+                        messages.success(request, "Your Bid has successfully added")
+                        return redirect('all_product_details')
+                    except Exception as e:
+                        messages.error(request,e)
+                        return redirect('all_product_details')
+                else:
+                    
+                    bid_exist = Bid.objects.filter(id=bid_status.id).exists()
+                    if bid_exist:
+                        try:
+                            print(bid_status.id)
+                            bid = Bid.objects.get(id=bid_status.id)
+                            print(bid.id)
+                            bid.bid_price=bid_price
+                            bid.save()
+                            messages.success(request, "Your Bid has updated")
+                            return redirect('all_product_details')
+                        except Exception as e:
+                            messages.error(request,e)
+                            return redirect('all_product_details')
+    
+            except Exception as e:
+                messages.error(request,e)
+                return redirect('all_product_details')
+
         except Exception as e:
             print(e)
-            messages.error(request, "Failed to Bid the Product!")
+            messages.error(request, e)
+            # messages.error(request, "Failed to Bid the Product!")
             return redirect('all_product_details')
     else:
         messages.error(request, "Invalid Method!")
         return redirect('all_product_details')
+
+# def accept_bid(request,pk):
+    
+#     bid=Bid.objects.get(id=pk)
+    
+#     print(bid.product)
+#     print(bid.product.author)
+#     print(bid.company)
+#     try:
+#         accepted_bid=AcceptBid()
+#         accepted_bid.bid=bid
+#         # set product order=true
+#         product=Product.objects.get(id=bid.product.id)
+#         product.order=True
+#         accepted_bid.save()
+#         product.save()
+#     except exception as e:
+#         print(e)
+#     return redirect('bid_details')
 
 def accept_bid(request,pk):
     
@@ -187,12 +244,11 @@ def accept_bid(request,pk):
     print(bid.product.author)
     print(bid.company)
     try:
-        accepted_bid=AcceptBid()
-        accepted_bid.bid=bid
+        bid.accepted_bid=True
         # set product order=true
         product=Product.objects.get(id=bid.product.id)
         product.order=True
-        accepted_bid.save()
+        bid.save()
         product.save()
     except exception as e:
         print(e)

@@ -60,7 +60,7 @@
               
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {% for cats in cats_menu %}
-                <li><a class="dropdown-item" href="#">{{ cats.name }}</a></li>
+                <li><a class="dropdown-item" href="{% url 'category_details' cats.name %}">{{ cats.name }}</a></li>
                 {% endfor %}
               </ul>
              

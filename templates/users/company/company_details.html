@@ -103,8 +103,18 @@
                 <div class="col-md-6">
                   <label>Company Description</label>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <p>{{comany.company_desc}}</p>
+                </div> -->
+                <div class="col-md-6">
+                  <p class="text-success" type="button" data-toggle="collapse" data-target="#company_description" aria-expanded="false" aria-controls="company_description">
+                    View Description
+                  </p>
+                </div>
+                <div class="collapse" id="company_description">
+                  <div class="card card-body">
+                    {{comany.company_desc}}
+                  </div>
                 </div>
               </div>
 

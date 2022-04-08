@@ -37,6 +37,8 @@ def category_details(request,cats):
 def all_category_details(request):
     cats_menu=Category.objects.all()
     context={'cats_menu':cats_menu}
+    for i in context:
+        print(i)
     return HttpResponseRedirect(request.path_info,context)
 
 def update_category(request,cats):
@@ -83,6 +85,7 @@ def all_product_details(request):
     all_products=Product.objects.all()
     # context['all_products']=all_products
     product_id=request.GET.get('product_id')
+    
     # all_bids=Bid.objects.all()
     print(product_id)
     context={
@@ -197,3 +200,8 @@ def accept_bid(request,pk):
 
 def company_rating(request, pk):
     pass
+
+def add_order_details(request):
+    return render(request,'orders/add_order_details.html')
+def view_order_details(request):
+    return render(request,'orders/view_order_details.html')

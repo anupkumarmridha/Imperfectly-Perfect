@@ -41,5 +41,7 @@ urlpatterns = [
     path('all-comment-details', views.all_comment_details, name='all_comment_details'),
     path('update-comment/<int:pk>', views.update_comment, name='update_comment'),
     path('delete-comment/<int:pk>', views.delete_comment, name='delete_comment'),
-
+# end point for orders
+    path('add_order_details', views.add_order_details, name='add_order_details'),
+    path('view_order_details', views.view_order_details, name='view_order_details'),
 ]

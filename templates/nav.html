@@ -46,7 +46,12 @@
               </li>
               {% endif %}
 
-            
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'add_order_details' %}">add_order_details</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'view_order_details' %}">view_order_details</a>
+              </li>
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="{% url 'all_category_details' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

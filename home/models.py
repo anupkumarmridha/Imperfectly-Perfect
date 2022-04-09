@@ -43,7 +43,8 @@ class Product(models.Model):
 class Bid(models.Model):
     product = models.ForeignKey(Product, related_name="bids", on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    bid_price=models.DecimalField(max_digits=8, decimal_places=2)         
+    bid_price=models.DecimalField(max_digits=8, decimal_places=2)
+    accepted_bid=models.BooleanField(default=False)         
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
@@ -57,10 +58,10 @@ class Bid(models.Model):
 #     created_at=models.DateTimeField(auto_now_add=True)
 #     updated_at=models.DateTimeField(auto_now=True)
 
-class AcceptBid(models.Model):
-    bid=models.ForeignKey(Bid, on_delete=models.CASCADE)
-    def __str__(self):
-        return str(self.bid.product)
+# class AcceptBid(models.Model):
+#     bid=models.ForeignKey(Bid, related_name="accepted_bid", on_delete=models.CASCADE)
+#     def __str__(self):
+#         return str(self.bid)
     
 
 class Rating(models.Model):

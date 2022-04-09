@@ -4,6 +4,9 @@
     --light: #f9cf00;
     --tangerine: #f19f4d;
 }
+*{
+    font-family: 'Montserrat', sans-serif;
+}
 body{
     background-color: var(--aluminium);
     height: 100vh;
@@ -15,6 +18,7 @@ body{
     text-decoration: none;
     color: black;
     transition: all 0.2s ease-out;
+    
 }
 .navbar a:hover{
     color: #e97500;
@@ -29,4 +33,13 @@ body{
     height: 12rem;
     border-radius: 2rem;
     width: auto;
+}
+#add-prod-css{
+    border-radius: 2rem;
+    width: 50%;
+}
+@media only screen and (max-width: 922px) {
+    #add-prod-css{
+        width: 80%;
+    }
 }

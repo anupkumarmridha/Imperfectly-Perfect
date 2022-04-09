@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.urls import is_valid_path
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from account.models import Company, Customer
-from home.models import Category, Product,Bid
+from home.models import Category, Product,Bid, Order
 from home.forms import PostProductForm, EditProductForm
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
@@ -91,9 +91,9 @@ def all_product_details(request):
     all_products=Product.objects.all()
     # context['all_products']=all_products
     product_id=request.GET.get('product_id')
-    # for i in all_products:
-    #     i.order=False
-    #     i.save()
+    for i in all_products:
+        i.order=False
+        i.save()
 
 
     # all_bids=Bid.objects.all()
@@ -271,7 +271,69 @@ def accept_bid(request,pk):
 def company_rating(request, pk):
     pass
 
-def add_order_details(request):
-    return render(request,'orders/add_order_details.html')
-def view_order_details(request):
-    return render(request,'orders/view_order_details.html')
+def add_order_details(request,pk):
+    bid=Bid.objects.get(id=pk)
+    # print(bid.id)
+    # print(bid.product.author.address)
+    if request.method=='POST':
+        print(bid.product.author.address)
+        delivery_date=request.POST['delivery_date']
+        shipping_partner=request.POST['shipping_partner']
+        product_location=request.POST['product_location']
+        delivery_address=request.POST.get('delivery_address')
+        payment_status=request.POST['payment_status']
+        try:
+            order=Order(bid=bid,delivery_date=delivery_date,shipping_partner=shipping_partner,product_location=product_location,delivery_address=delivery_address, payment_status=payment_status)
+            order.save()
+            messages.success(request, "Order successfuly order")
+            return redirect('view_order_details',pk=bid.id)
+        except Exception as e:
+            messages.error(request,e)
+            return redirect('view_order_details',pk=bid.id)
+  
+    context={
+        'bid':bid,
+    }
+    
+    return render(request,'orders/add_order_details.html',context)
+
+def update_order_details(request,pk):
+    bid=Bid.objects.get(id=pk)
+    # print(bid.id)
+    # print(bid.product.author.address)
+    if request.method=='POST':
+        delivery_date=request.POST.get('delivery_date')
+        shipping_partner=request.POST.get('shipping_partner')
+        product_location=request.POST.get('product_location')
+        delivery_address=request.POST.get('delivery_address')
+        payment_status=request.POST.get('payment_status')
+        try:
+            order=Order.objects.filter(bid=bid)
+            order.delivery_date=delivery_date
+            order.delivery_address=delivery_address
+            order.shipping_partner=shipping_partner
+            order.product_location=product_location
+            order.payment_status=payment_status
+            order.save()
+            messages.success(request, "Order successfuly order")
+            return redirect('view_order_details')
+        except Exception as e:
+            messages.error(request,e)
+            return redirect('view_order_details')
+
+    context={
+        'bid':bid,
+    }
+    return render(request,'orders/update_order.html',context)
+
+
+
+def view_order_details(request,pk):
+    bid=Bid.objects.get(id=pk)
+    all_order=Order.objects.filter(bid=bid.id)
+    print(bid.bid_price)
+    context={
+        'bid':bid,
+        'all_order':all_order,
+    }
+    return render(request,'orders/view_order_details.html',context)

@@ -42,10 +42,10 @@
                                   Company: <a type="button" class="btn-sm btn-warning" href="{% url 'company_details' bid.company.pk %}"> {{bid.company}} </a></p>
                                   
                                     <p>Offer Acepted</p>
-                                    <a href="{% url 'view_order_details' %}" type="button" class="btn-sm btn-success">View Order</a>
+                                    <a href="{% url 'view_order_details' bid.pk %}" type="button" class="btn-sm btn-success">View Order</a>
                                     {% endif %}
                               {% else %}
-                              <p class="d-inline">Offerd Price : {{bid.bid_price}} 
+                              <p class="d-inline">Offerd Price : ₹ {{bid.bid_price}} 
                               Company: <a type="button" class="btn-sm btn-warning" href="{% url 'company_details' bid.company.pk %}"> {{bid.company}} </a></p>
                               <a href="{% url 'accept_bid' bid.pk %}" type="button" class="btn-sm btn-success">Accept</a>
                               <button type="button" class="btn-sm btn-danger">Decline</button>

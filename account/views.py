@@ -1,6 +1,7 @@
 from email import message
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse_lazy, reverse
+from sympy import product
 from account.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from account.models import Company, Customer, User
@@ -89,13 +90,13 @@ def handleLogin(request):
                 
             if user_type == "1":
                 # return HttpResponse("Student Login")
-                return redirect('admin_home')
+                return redirect(views.homeView)
 
             elif user_type == '2':
                 customer_exist = Customer.objects.filter(user=user).exists()
                 if customer_exist:
                     messages.success(request,"Customer home !")
-                    return redirect('customer_home')
+                    return redirect(views.homeView)
 
                 return redirect('add_customer')
 

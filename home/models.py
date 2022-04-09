@@ -64,13 +64,16 @@ class Bid(models.Model):
 #     def __str__(self):
 #         return str(self.bid)
     
-# class order(models.Model):
-#     bid=models.ForeignKey(Bid, on_delete=models.CASCADE)
-#     delv_date=models.DateField()
-#     delv_partner=models.CharField(max_length=255)
-#     location=models.CharField(max_length=255)
-#     address=models.CharField(max_length=255)
-#     payment=models.CharField(max_length=255)
+class Order(models.Model):
+    bid=models.ForeignKey(Bid, related_name="order" ,on_delete=models.CASCADE)
+    delivery_date=models.DateField()
+    shipping_partner=models.CharField(max_length=255)
+    product_location=models.CharField(max_length=255)
+    delivery_address=models.CharField(max_length=255)
+    payment_status=models.CharField(max_length=255)
+    
+    def __str__(self):
+        return str(self.bid)
 
 class Rating(models.Model):
     company=models.ForeignKey(Company, on_delete=models.CASCADE)

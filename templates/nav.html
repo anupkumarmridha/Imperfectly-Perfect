@@ -15,9 +15,13 @@
               <a class="nav-link {% block productactive %}{% endblock productactive %}" href="/all-product-details">Listings</a>
             </li>
 
+<<<<<<< HEAD
              <!-- <li class="nav-item mx-2">
+=======
+             
+>>>>>>> 43360b3fe697fb85d53b8390fe91689e4ba6dc17
               <a class="nav-link {% block registeractive %}{% endblock registeractive %}" href="{% url 'register' %}">Register</a>
-            </li>  -->
+            
             
 
              <!-- {% comment %} <li class="nav-item mx-2">
@@ -47,6 +51,7 @@
               
               {% endif %}
 
+<<<<<<< HEAD
               <!-- <li class="nav-item mx-2">
                 <a class="nav-link " href="{% url 'add_order_details' %}">add_order_details</a>
               </li>
@@ -54,6 +59,8 @@
                 <a class="nav-link " href="{% url 'view_order_details' %}">view_order_details</a>
               </li> -->
 
+=======
+>>>>>>> 43360b3fe697fb85d53b8390fe91689e4ba6dc17
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="{% url 'all_category_details' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Category
@@ -101,6 +108,7 @@
 
                         <button class="dropdown-item" type="submit">Logout</button>
                     </form>
+                    <button class="dropdown-item" type="submit">Your Profile</button>
                     {% comment %} <a class="dropdown-item" href="{% url 'View_Profile' user.pk %}">View Profile</a> {% endcomment %}
                 </div>
             </li>

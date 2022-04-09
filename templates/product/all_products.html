@@ -17,7 +17,7 @@
                   <h5 class="card-title">{{ product.title }}</h5>
                   <p class="card-text">{{ product.desc | slice:':100' | safe }}
 
-                  <a href=" {% url 'product_details' product.pk %}">View Product</a>
+                  <a href=" {% url 'product_details' product.pk %}"><i class="bi bi-eye-fill"></i>View Product</a>
                   </p>
       
                   

@@ -17,16 +17,16 @@ sign_in_btn.addEventListener('click', () => {
 
 
 
-document.getElementById("sign-up-btn-user").onclick = setTimeout(function() {
+document.getElementById("sign-up-btn-user").onclick = function() {
   
   document.getElementById("company").style.display = "none";
   document.getElementById("user").style.display = "block";
 
-}, 1000);
+}
 
-document.getElementById("sign-up-btn-company").onclick = setTimeout(function() {
+document.getElementById("sign-up-btn-company").onclick = function() {
   
   document.getElementById("user").style.display = "none";
   document.getElementById("company").style.display = "block";
 
-}, 1000);
+}

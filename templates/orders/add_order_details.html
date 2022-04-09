@@ -1,9 +1,81 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}add order details{% endblock title %} 
+{% block title %}add order details{% endblock title %}
 
 
-{% block body %} 
 
-this is add order page
+{% block body %}
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">ORDER SUMMARY</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="wrapper">
+                    <div class="row no-gutters shadow-lg">
+                        <div class="col-lg-8 col-md-7 order-md-last d-flex mx-auto">
+                            <div class="contact-wrap w-100 p-md-5 p-4">
+                                <form id="contactForm" name="contactForm" class="contactForm">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="label" for="delivery_date">Delivered by:</label>
+                                                <input type="date" class="form-control" name="delivery_date"
+                                                    id="delivery_date">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="label" for="shipping_partner">Shipping Partner</label>
+                                                <input type="text" class="form-control" name="shipping_partner"
+                                                    id="shipping_partner" placeholder="Shipped via">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="label" for="product_location">Arrived At</label>
+                                                <input type="text" class="form-control" name="product_location"
+                                                    id="product_location" placeholder="Last location of product">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="label" for="#">Delivery Address</label>
+                                                <textarea name="delivery_address" class="form-control"
+                                                    id="delivery_address" cols="30" rows="4"
+                                                    placeholder="Customer Address"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary">
+                                                    Send to Customer
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
+                            <div class="info-wrap w-100 ">
+                                
+                                <img src="media\images\company\profile\delivery_process.jpg" style='height: 100%; width: 100%; object-fit: contain'/>
+                                
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock body %}

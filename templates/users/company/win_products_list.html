@@ -51,7 +51,7 @@
                           </ul>
                           <div class="mx-auto">
                               <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}" style="background-color: #f9cf00; border:0px">
-                              Info
+                                <i class="bi bi-info-circle-fill mr-1" ></i>Info
                               </button> 
                               {% if user.is_authenticated %}
                               {% if user.company %}
@@ -93,7 +93,8 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
+            <i class="bi bi-info-circle-fill mr-1" ></i>Info
+            
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

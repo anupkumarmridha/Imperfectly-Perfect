@@ -58,7 +58,7 @@
                               {% comment %} <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}">
                                   Submit Bid
                               </button> {% endcomment %}
-                              <a href=" {% url 'add_order_details' %}" type="button" class="btn btn-primary btn-sm-center">
+                              <a href=" {% url 'add_order_details' bid.pk %}" type="button" class="btn btn-primary btn-sm-center">
                                 Manage Order
                               </a>
                               {% else %}

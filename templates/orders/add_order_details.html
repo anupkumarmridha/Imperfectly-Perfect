@@ -6,6 +6,18 @@
 
 {% block body %}
 
+{% if bid.order %}
+
+<!---------- local stylesheet ---------->
+<link rel="stylesheet" href="{% static "css/view_order_style.css" %}">
+
+<a href=" {% url 'add_order_details' bid.pk %}" type="button" class="btn btn-primary btn-sm-center">
+    Manage Order
+   
+</a>
+
+{% else %}
+
 <section class="ftco-section">
     <div class="container">
         <!---------- Heading---------->
@@ -23,8 +35,8 @@
                         <div class="col-lg-8 col-md-7 order-md-last d-flex mx-auto">
                             <div class="contact-wrap w-100 p-md-5 p-4">
 
-                                <form id="contactForm" name="contactForm" class="contactForm">
-                                
+                                <form id="contactForm" name="contactForm" class="contactForm" method='post'>
+                                {% csrf_token %}
                                 <!----------Form fields ---------->
                                     <div class="row">
                                         <div class="col-md-6">
@@ -56,7 +68,7 @@
                                                 <label class="label" for="#">Delivery Address</label>
                                                 <textarea name="delivery_address" class="form-control"
                                                     id="delivery_address" cols="30" rows="4"
-                                                    placeholder="Customer Address"></textarea>
+                                                    placeholder="Customer Address" value="{{bid.product.author.address}}">{{bid.product.author.address}}</textarea>
                                             </div>
                                         </div>
 
@@ -76,7 +88,7 @@
                                         <!---------- Submit button ---------->
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <button class="btn btn-primary">
+                                                <button type='submit' class="btn btn-primary">
                                                     Send to Customer
                                                 </button>
                                             </div>
@@ -95,5 +107,5 @@
         <!---------- Order Summary form end---------->
     </div>
 </section>
-
+{% endif %}
 {% endblock body %}

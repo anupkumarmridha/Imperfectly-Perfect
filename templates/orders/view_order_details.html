@@ -1,9 +1,101 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}view order details{% endblock title %} 
+{% block title %}view order details{% endblock title %}
 
 
-{% block body %} 
-this is view order page
+{% block body %}
+
+<!---------- local stylesheet ---------->
+<link rel="stylesheet" href="{% static "css/view_order_style.css" %}">
+
+<!---------- Header section ---------->
+<div class="d-flex flex-column justify-content-center align-items-center" id="order-heading">
+    <div class="text-uppercase">
+        <p>Order detail</p>
+    </div>
+    <div class="h4">Tuesday, December 08, 2020</div>
+</div>
+<!---------- Header section ends ---------->
+
+<!---------- Shipping details section starts ---------->
+<div class="wrapper bg-white shadow-lg">
+    <div class="table-responsive">
+        <!---------- Headings here ---------->
+        <table class="table table-borderless">
+            <thead>
+                <tr class="text-uppercase text-muted">
+                    <th scope="col">product</th>
+                    <th scope="col" class="text-right">total</th>
+                </tr>
+            </thead>
+        <!---------- Headings here end---------->
+
+        <!---------- Heading value goes here ---------->
+            <tbody>
+                <tr>
+                    <th scope="row">Product Name</th>
+                    <td class="text-right"><b>Total cost</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!---------- Heading value ends ---------->
+
+
+    <!---------- other Shipping details section  ---------->
+    <div class="d-sm-flex justify-content-start rounded my-3 inline-style">
+        <div>
+            <b>Expected Delivery Date:</b>
+        </div>
+        <div class="ml-2">
+            December 08, 2020
+        </div>
+    </div>
+
+    <div class="d-sm-flex justify-content-start rounded my-3 inline-style">
+        <div>
+            <b>Shipping partner:</b>
+        </div>
+        <div class="ml-2">
+            Shipping partner name
+        </div>
+    </div>
+
+
+
+    <div class="row border rounded p-1 my-3">
+
+        <div class="col-md-6 py-3">
+            <div class="d-flex flex-column align-items start"> <b>Shipping Address</b>
+                <p class="text-justify pt-2">James Thompson, 356 Jonathon Apt.220, New York</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-sm-flex justify-content-start rounded my-3 inline-style">
+        <div>
+            <b>Shipment Location:</b>
+        </div>
+        <div class="ml-2">
+            Shipment location
+        </div>
+    </div>
+
+    <div class="d-sm-flex justify-content-start rounded my-3 inline-style">
+        <div>
+            <b>Payment Status:</b>
+        </div>
+        <div class="ml-2">
+            Paid
+        </div>
+    </div>
+    <!---------- other Shipping details section ends ---------->
+    <!---------- Shipping details section ends ---------->
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="h4">Thanks for choosing us!</div>
+    </div>
+
+</div>
 
 {% endblock body %}

@@ -1,3 +1,4 @@
+from email.headerregistry import Address
 from django.db import models
 from account.models import User, Customer,Company
 from ckeditor.fields import RichTextField
@@ -63,6 +64,13 @@ class Bid(models.Model):
 #     def __str__(self):
 #         return str(self.bid)
     
+# class order(models.Model):
+#     bid=models.ForeignKey(Bid, on_delete=models.CASCADE)
+#     delv_date=models.DateField()
+#     delv_partner=models.CharField(max_length=255)
+#     location=models.CharField(max_length=255)
+#     address=models.CharField(max_length=255)
+#     payment=models.CharField(max_length=255)
 
 class Rating(models.Model):
     company=models.ForeignKey(Company, on_delete=models.CASCADE)

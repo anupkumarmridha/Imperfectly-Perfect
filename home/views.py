@@ -97,6 +97,7 @@ def all_product_details(request):
 
 
     # all_bids=Bid.objects.all()
+    
     print(product_id)
     context={
         'all_products':all_products,

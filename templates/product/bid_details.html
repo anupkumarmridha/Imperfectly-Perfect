@@ -42,7 +42,7 @@
                                   Company: <a type="button" class="btn-sm btn-warning" href="{% url 'company_details' bid.company.pk %}"> {{bid.company}} </a></p>
                                   
                                     <p>Offer Acepted</p>
-                                    <a href="" type="button" class="btn-sm btn-success">View Order</a>
+                                    <a href="{% url 'view_order_details' %}" type="button" class="btn-sm btn-success">View Order</a>
                                     {% endif %}
                               {% else %}
                               <p class="d-inline">Offerd Price : {{bid.bid_price}} 

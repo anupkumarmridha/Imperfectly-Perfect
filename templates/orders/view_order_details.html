@@ -33,8 +33,8 @@
         <!---------- Heading value goes here ---------->
             <tbody>
                 <tr>
-                    <th scope="row">Product Name</th>
-                    <td class="text-right"><b>Total cost</b></td>
+                    <th scope="row">Product Name : {{bid.product.title}}</th>
+                    <td class="text-right"><b>Total cost ₹ {{bid.bid_price}}</b></td>
                 </tr>
             </tbody>
         </table>
@@ -43,13 +43,17 @@
     <!---------- Heading value ends ---------->
 
 
+
+
     <!---------- other Shipping details section  ---------->
+    {% for order in bid.order.all %}
+    {% if order.bid == bid %}
     <div class="d-sm-flex justify-content-start rounded my-3 inline-style">
         <div>
             <b>Expected Delivery Date:</b>
         </div>
         <div class="ml-2">
-            December 08, 2020
+            {{order.delivery_date}}
         </div>
     </div>
 
@@ -58,7 +62,7 @@
             <b>Shipping partner:</b>
         </div>
         <div class="ml-2">
-            Shipping partner name
+            {{order.shipping_partner}}
         </div>
     </div>
 
@@ -68,7 +72,7 @@
 
         <div class="col-md-6 py-3">
             <div class="d-flex flex-column align-items start"> <b>Shipping Address</b>
-                <p class="text-justify pt-2">James Thompson, 356 Jonathon Apt.220, New York</p>
+                <p class="text-justify pt-2">{{ bid.product.author.address }}</p>
             </div>
         </div>
     </div>
@@ -78,7 +82,15 @@
             <b>Shipment Location:</b>
         </div>
         <div class="ml-2">
-            Shipment location
+            {{order.delivery_address}}
+        </div>
+    </div>
+    <div class="d-sm-flex justify-content-start rounded my-3 inline-style">
+        <div>
+            <b>Current Location:</b>
+        </div>
+        <div class="ml-2">
+            {{order.product_location}}
         </div>
     </div>
 
@@ -87,10 +99,13 @@
             <b>Payment Status:</b>
         </div>
         <div class="ml-2">
-            Paid
+            {{order.payment_status}}
         </div>
     </div>
+{% endif %}
+    {% endfor %}
     <!---------- other Shipping details section ends ---------->
+   
     <!---------- Shipping details section ends ---------->
     <div class="d-flex flex-column justify-content-center align-items-center">
         <div class="h4">Thanks for choosing us!</div>

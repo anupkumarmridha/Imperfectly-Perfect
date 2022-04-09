@@ -17,15 +17,16 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form action="#" class="sign-in-form">
+                <form action='{% url 'handleLogin' %}' method="post" class="sign-in-form">
+                    {% csrf_token %}
                     <h2 class="title">Sign in</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Email" />
+                        <input type="text" name="email" placeholder="Email" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" />
+                        <input type="password" id="loginpassword" name="loginpassword" autocomplete="loginpassword" placeholder="Password" required  />
                     </div>
                     <input class="btn solid" type="submit" value="Login" />
                 </form>

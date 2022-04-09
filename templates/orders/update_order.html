@@ -6,8 +6,9 @@
 
 {% block body %}
 
-{% if not bid.order.all %}
 <section class="ftco-section">
+    {% for order in bid.order.all %}
+    {% if order.bid == bid %}
     <div class="container">
         <!---------- Heading---------->
         <div class="row justify-content-center mt-4">
@@ -31,7 +32,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="delivery_date">Delivered by:</label>
-                                                <input type="date" class="form-control" name="delivery_date"
+                                                <input type="date" class="form-control" value={{order.delivery_date}} name="delivery_date"
                                                     id="delivery_date">
                                             </div>
                                         </div>
@@ -40,7 +41,7 @@
                                             <div class="form-group">
                                                 <label class="label" for="shipping_partner">Shipping Partner</label>
                                                 <input type="text" class="form-control" name="shipping_partner"
-                                                    id="shipping_partner" placeholder="Shipped via">
+                                                    id="shipping_partner" placeholder="{{order.shipping_partner}}">
                                             </div>
                                         </div>
 
@@ -48,7 +49,7 @@
                                             <div class="form-group">
                                                 <label class="label" for="product_location">Arrived At</label>
                                                 <input type="text" class="form-control" name="product_location"
-                                                    id="product_location" placeholder="Last location of product">
+                                                    id="product_location" placeholder="{{order.product_location}}">
                                             </div>
                                         </div>
 
@@ -67,7 +68,7 @@
                                             <div class="form-group">
                                                 <label class="label" for="payment_status">Payment Status</label>
                                                 <input type="text" class="form-control" name="payment_status"
-                                                    id="payment_status" placeholder="Payment status">
+                                                    id="payment_status" placeholder="{{order.payment_status}}">
                                             </div>
                                         </div>
                                         <!---------- payment status ends ---------->
@@ -95,19 +96,8 @@
         </div>
         <!---------- Order Summary form end---------->
     </div>
-    {% else %}
 <!---------- local stylesheet ---------->
-<link rel="stylesheet" href="{% static "css/view_order_style.css" %}">
-
-<a href=" {% url 'view_order_details' bid.pk %}" type="button" class="btn btn-primary btn-sm-center">
-    View Order
-   
-</a>
-
-{% comment %} <a href=" {% url 'update_order_details' bid.pk %}" type="button" class="btn btn-primary btn-sm-center">
-    Update Order
-   
-</a> {% endcomment %}
-    {% endif %}
+{% endif %}
+    {% endfor %}
 </section>
 {% endblock body %}

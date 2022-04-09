@@ -24,7 +24,7 @@
 </small>
 
 <hr>
-{% if product_image.url %}
+{% if product.product_image.url %}
 <img src=" {{ product.product_image.url }} ">
 {% endif %}
 <br>
@@ -39,7 +39,6 @@
 <br>
 <small> Total Bids {{ product.bids.all.count }} </small>
 <br>
-<small> Lowest Bids {{ product.bids.all.min }} </small>
 <br>
     {% if not product.bids.all %}
     
@@ -47,10 +46,11 @@
     <small>Make Your First Bid</small>
 
     {% else %}
-  
+    <small> Bids :
     {% for bid in product.bids.all  %}
-    <small> Last bid: {{ bid.bid_price }} </small>
+     ₹ {{ bid.bid_price }}
     {% endfor %}
+</small>
     {% endif %}
 
 {% if user.is_authenticated %}

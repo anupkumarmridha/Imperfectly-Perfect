@@ -91,9 +91,9 @@ def all_product_details(request):
     all_products=Product.objects.all()
     # context['all_products']=all_products
     product_id=request.GET.get('product_id')
-    # for i in all_products:
-    #     i.order=False
-    #     i.save()
+    for i in all_products:
+        i.order=False
+        i.save()
 
 
     # all_bids=Bid.objects.all()
@@ -286,16 +286,17 @@ def add_order_details(request,pk):
             order=Order(bid=bid,delivery_date=delivery_date,shipping_partner=shipping_partner,product_location=product_location,delivery_address=delivery_address, payment_status=payment_status)
             order.save()
             messages.success(request, "Order successfuly order")
-            return redirect('view_order_details')
+            return redirect('view_order_details',pk=bid.id)
         except Exception as e:
             messages.error(request,e)
-            return redirect('view_order_details')
+            return redirect('view_order_details',pk=bid.id)
   
     context={
         'bid':bid,
     }
     
     return render(request,'orders/add_order_details.html',context)
+
 def update_order_details(request,pk):
     bid=Bid.objects.get(id=pk)
     # print(bid.id)
@@ -320,10 +321,19 @@ def update_order_details(request,pk):
             messages.error(request,e)
             return redirect('view_order_details')
 
+    context={
+        'bid':bid,
+    }
+    return render(request,'orders/update_order.html',context)
 
-    return render(request,'orders/add_order_details.html')
-def view_order_details(request):
-    # bid=Bid.objects.get(bid=pk)
-    # order=Order.objects.get(id=id)
-    # print(bid.bid_price)
-    return render(request,'orders/view_order_details.html')
+
+
+def view_order_details(request,pk):
+    bid=Bid.objects.get(id=pk)
+    all_order=Order.objects.filter(bid=bid.id)
+    print(bid.bid_price)
+    context={
+        'bid':bid,
+        'all_order':all_order,
+    }
+    return render(request,'orders/view_order_details.html',context)

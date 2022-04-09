@@ -97,6 +97,7 @@ def all_product_details(request):
 
 
     # all_bids=Bid.objects.all()
+    
     print(product_id)
     context={
         'all_products':all_products,
@@ -106,14 +107,17 @@ def all_product_details(request):
 
 
 def customer_product_list(request,pk):
-    pk=Customer.objects.get(user=request.user)
-    # print(pk)
-    all_posted_product=Product.objects.filter(author=pk).order_by('created_at')
-    context['all_posted_product']=all_posted_product
-    
-    # all_bids
-    all_bids=Bid.objects.all()
-
+    try:
+        pk=Customer.objects.get(user=request.user)
+        # print(pk)
+        all_posted_product=Product.objects.filter(author=pk).order_by('created_at')
+        context['all_posted_product']=all_posted_product
+        
+        # all_bids
+        all_bids=Bid.objects.all()
+    except:
+        messages.warning(request, "You have no Product")
+        return redirect('all_product_details')
     return render(request,'product/customer_product_list.html',context)
 
 
@@ -160,12 +164,16 @@ def delete_comment(request,pk):
   
 # Customer product related functionality
 def bid_details(request):
-    pk=Customer.objects.get(user=request.user)
-    all_posted_product=Product.objects.filter(author=pk).order_by('created_at')
-    context={
-        'all_posted_product':all_posted_product,             
-        }
-    return render(request,'product/bid_details.html',context)
+    try:
+        pk=Customer.objects.get(user=request.user)
+        all_posted_product=Product.objects.filter(author=pk).order_by('created_at')
+        context={
+            'all_posted_product':all_posted_product,             
+            }
+        return render(request,'product/bid_details.html',context)
+    except:
+        messages.warning(request, "You have no Bid details")
+        return redirect('all_product_details')
 
 def add_bid(request):
     if request.method=='POST':

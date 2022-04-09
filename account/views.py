@@ -122,7 +122,11 @@ def add_customer(request):
         phone=request.POST['phone']
         address=request.POST['address']
         pin=request.POST['pin']
-        profile_pic=request.FILES['profile_pic']
+        if len(request.FILES) != 0:
+            profile_pic=request.FILES['profile_pic']
+            print(profile_pic)
+        else:
+            profile_pic=None
         print(user)
         try:
             customer=Customer()
@@ -159,7 +163,11 @@ def add_company(request):
         pin=request.POST['pin']
         company_desc=request.POST['company_desc']
         # profile_pic=request.POST['profile_pic']
-        profile_pic = request.FILES['profile_pic']
+        if len(request.FILES) != 0:
+            profile_pic=request.FILES['profile_pic']
+            print(profile_pic)
+        else:
+            profile_pic=None
         print(user)
         try:
             company=Company()

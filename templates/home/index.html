@@ -1,6 +1,12 @@
 {% extends 'base.html' %} 
+{% load static %}
 {% block title %}Home{% endblock title %} 
 {% block homeactive %} active {% endblock homeactive %}
+
+    
+{% block custom_css %}
+<link rel="stylesheet" href="{% static "css/bg.css" %}">
+{% endblock custom_css %}
 
 {% block body %} 
 

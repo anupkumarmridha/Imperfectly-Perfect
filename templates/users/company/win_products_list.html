@@ -15,7 +15,7 @@
            
             {% for bid in product.bids.all %}                
                   {% if bid.company.user.id == user.id %}
-                      <div class="card col-3 m-4" style="width: 18rem;">
+                      <div class="card col-3 m-4 cardcss" style="width: 18rem;">
                          
                           {% if product.product_image %}
                           <img src=" {{ product.image_url|default_if_none:'#' }} " class="card-img-top p-2" alt="..." width="320" height="180">
@@ -26,7 +26,7 @@
                           <h5 class="card-title">{{ product.title }}</h5>
                           <p class="card-text">{{ product.desc | slice:':100' | safe }}
 
-                          <a href=" {% url 'product_details' product.pk %}">View Product</a>
+                            <a href=" {% url 'product_details' product.pk %}"><i class="bi bi-eye-fill mr-1"></i>View Product</a>
                           </p>
               
                           
@@ -49,17 +49,16 @@
                               <span class="badge bg-primary rounded-pill">Clothings</span>
                               </li>
                           </ul>
-                          
-                          <div class="card-bodyjustify-content-around">
-                              <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}">
-                              Info
+                          <div class="mx-auto">
+                              <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}" style="background-color: #f9cf00; border:0px">
+                                <i class="bi bi-info-circle-fill mr-1" ></i>Info
                               </button> 
                               {% if user.is_authenticated %}
                               {% if user.company %}
                               {% comment %} <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}">
                                   Submit Bid
                               </button> {% endcomment %}
-                              <a href=" {% url 'product_details' product.pk %}" type="button" class="btn btn-primary btn-sm-center">
+                              <a href=" {% url 'add_order_details' %}" type="button" class="btn btn-primary btn-sm-center">
                                 Manage Order
                               </a>
                               {% else %}
@@ -94,7 +93,8 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Product info</h5>
+            <i class="bi bi-info-circle-fill mr-1" ></i>Info
+            
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

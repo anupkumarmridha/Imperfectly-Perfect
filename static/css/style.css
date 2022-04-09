@@ -1,6 +1,6 @@
 :root{
     --cerulean: #4484ce;
-    --aluminium: #d9d9d9;
+    --aluminium: #fffefe;
     --light: #f9cf00;
     --tangerine: #f19f4d;
 }
@@ -12,7 +12,7 @@ body{
     height: 100vh;
 }
 .navbar{
-    background-color: transparent;
+    background-color: var(--aluminium);
 }
 .navbar a{
     text-decoration: none;
@@ -38,8 +38,13 @@ body{
     border-radius: 2rem;
     width: 50%;
 }
+#cke_id_desc{
+    width: 30rem;
+}
 @media only screen and (max-width: 922px) {
     #add-prod-css{
-        width: 80%;
+        width: 95%;
+        margin: 0.5rem;
+        padding:0rem;
     }
 }

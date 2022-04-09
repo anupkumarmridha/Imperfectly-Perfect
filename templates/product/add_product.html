@@ -4,7 +4,7 @@
 {% block body %}
 {% if user.is_authenticated %}
 
-<div class="container my-5 bg-white p-5" id="add-prod-css">
+<div class="container-fluid my-5 bg-white p-2" id="add-prod-css">
 <!-- <h1 class="text-center">List Your</h1> -->
     
     <br/><br/>
@@ -13,8 +13,8 @@
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
-
-        <button class="btn" style="background-color: #f9cf00;">POST</button>
+        <div class="text-center"><button class="btn btn-outline-dark" >POST</button></div>
+        
     </form>
 </div>
 

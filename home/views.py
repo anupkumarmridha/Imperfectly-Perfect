@@ -93,16 +93,16 @@ def all_product_details(request):
     all_products=Product.objects.all()
     # context['all_products']=all_products
     product_id=request.GET.get('product_id')
-    # for i in all_products:
-    #     i.order=False
-    #     i.save()
+    for i in all_products:
+        i.order=False
+        i.save()
 
 
     # all_bids=Bid.objects.all()
     cats_menu=Category.objects.all()
-    for i in cats_menu:
-        print(i)
-    print(product_id)
+    # for i in cats_menu:
+    #     print(i)
+    # print(product_id)
     context={
         'all_products':all_products,
         'cats_menu': cats_menu,

@@ -54,17 +54,17 @@
                           </ul>
                           
                           <div class="mx-auto">
-                              <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}" style="background-color: #f9cf00; border:0px">
+                              <button type="button" class="btn btn-dark m-2" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}" style="background-color: #f9cf00; border:0px">
                               <i class="bi bi-info-circle-fill mr-1" ></i>Info
                               </button>
                               {% if user.is_authenticated %}
                               {% if user.company %}
-                              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}" style="background-color: #f19f4d;border:0px">
+                              <button type="button" class="btn btn-dark m-2" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}" style="background-color: #f19f4d;border:0px">
                                   Submit Bid
                               </button>
                               {% endif %}
                               {% else %}
-                              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal" style="background-color: #f19f4d;border:0px">
+                              <button type="button" class="btn btn-dark m-2" data-bs-toggle="modal" data-bs-target="#loginModal" style="background-color: #f19f4d;border:0px">
                                   Submit Bid
                               </button>
                           {% comment %} {% endif %} {% endcomment %}

@@ -8,7 +8,7 @@
     <!-- -----------------------------------Product list start----------------------------------- -->
     <div class="container">
         <div class="row gap-3 justify-content-around">
-          <h2 class="text-center">Here are your Orders </h2>
+          <h2 class="text-center">Your Orders </h2>
           {% for product in all_products %}
             {% if product.order %}
               
@@ -34,7 +34,7 @@
                           <ul class="list-group">
                               <li class="list-group-item d-flex justify-content-between align-items-center">
                               Author
-                              <span class="badge bg-success rounded-pill">{{ product.author }}</span>
+                              <span class="text-dark fw-bold">{{ product.author }}</span>
                               </li>
 
                               <li class="list-group-item d-flex justify-content-between align-items-center">

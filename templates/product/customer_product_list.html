@@ -6,7 +6,7 @@
 
 <!-- section to view listed products -->
 <section id="view-listed-products">
-    <h2 class="text-center">Here are your Listed Products</h2>
+    <h2 class="text-center">Your Listed Products</h2>
     <div class="container my-5">
     <div id="accordion">
 
@@ -16,23 +16,20 @@
 
         {% for product in all_posted_product %}
         <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#product_{{product.pk}}" aria-expanded="true" aria-controls="product_{{product.pk}}">
-          <h5 class="mb-0">{{ product.title }}
-            {% comment %} <a href="{% url 'update_product' product.pk %}" class='btn-sm' >Edit</a>
-            <a href="{% url 'delete_product' product.pk %}" class='btn-sm' >Delete</a> {% endcomment %}
-          </h5>
-          <h6 class="mb-0">{{ product.desc | slice:':120' | safe }}
-
-            <a href=" {% url 'product_details' product.pk %}">View Product</a>
-
-          </h6>
+          <h5 class="mb-0">{{ product.title }}</h5>
+            <!-- {% comment %} <a href="{% url 'update_product' product.pk %}" class='btn-sm' >Edit</a>
+            <a href="{% url 'delete_product' product.pk %}" class='btn-sm' >Delete</a> {% endcomment %} -->
+          <h6 class="mb-0">{{ product.desc | slice:':120' | safe }} . . . . .</h6>
         </div>
         
         <div id="product_{{product.pk}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
           
           <div class="card-body">  
             <div class="bid-details my-1">
-                  <a href="{% url 'delete_product' product.pk %}" type="button" class="btn-sm btn-danger" >Remove</a>
-                  <a href="{% url 'update_product' product.pk %}" type="button" class="btn-sm btn-warning">Update</a>
+              <a href=" {% url 'product_details' product.pk %}" type="button" class="btn-sm text-white p-2" style="text-decoration: none; background-color: #4484ce;"><i class="bi bi-eye"></i> View</a>
+              <a href="{% url 'update_product' product.pk %}" type="button" class="btn-sm text-white p-2" style="text-decoration: none;background-color:#f9cf00;"><i class="bi bi-pencil"></i> Update</a>
+              <a href="{% url 'delete_product' product.pk %}" type="button" class="btn-sm btn-danger p-2" style="text-decoration: none;"><i class="bi bi-trash"></i> Remove</a>
+              
               
             </div>
 

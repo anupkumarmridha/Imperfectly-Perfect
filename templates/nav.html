@@ -4,44 +4,44 @@
     <!-- -----------------------------------Navbar start----------------------------------- -->
     <nav class="navbar navbar-expand-lg mb-2">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/"><strong>Bid N' Build</strong></a>
+        <a class="navbar-brand text-dark" href="/"><strong>Bid N' Build</strong></a>
         <button class="navbar-toggler border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="bi bi-list"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-            <li class="nav-item">
+            <li class="nav-item mx-2">
               <a class="nav-link {% block productactive %}{% endblock productactive %}" href="/all-product-details">Listings</a>
             </li>
 
-             
+             <!-- <li class="nav-item mx-2">
               <a class="nav-link {% block registeractive %}{% endblock registeractive %}" href="{% url 'register' %}">Register</a>
             
             
 
-             <!-- {% comment %} <li class="nav-item">
+              {% comment %} <li class="nav-item mx-2">
               <a class="nav-link " href="{% url 'add_customer' %}">add customer</a>
              </li> 
 
-             <li class="nav-item">
+             <li class="nav-item mx-2">
               <a class="nav-link" href="{% url 'add_company' %}">add company</a>
              </li>  {% endcomment %} -->
             
             {% if user.is_authenticated %}
 
               {% if user.user_type == '2' or user.user_type == '1' %}
-              <li class="nav-item">
+              <li class="nav-item mx-2">
                 <a class="nav-link {% block addProductActive %}{% endblock addProductActive %}" href="{% url 'add_product' %}">Add Product</a>
               </li>
             
 
-              <li class="nav-item">
+              <li class="nav-item mx-2">
                 <a class="nav-link {% block CustomerProductsActive %}{% endblock CustomerProductsActive %}" href="{% url 'customer_product_list' user.pk %}">Your Products</a>
               </li>
 
               
-              <li class="nav-item">
+              <li class="nav-item mx-2">
                 <a class="nav-link {% block BidDetailsActive %}{% endblock BidDetailsActive %}" href="{% url 'bid_details' %}">Bid Details</a>
               </li>
               
@@ -60,10 +60,10 @@
              
             </li>
               {% if user.user_type == '3' or user.user_type == '1' %}
-              <li class="nav-item">
+              <li class="nav-item mx-2">
                 <a class="nav-link {% block mywinactive %}{% endblock mywinactive %}" aria-current="page" href="{% url 'my_win_products' %}">My Winings</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item mx-2">
                 <a class="nav-link {% block mybidsactive %}{% endblock mybidsactive %}" aria-current="page" href="{% url 'bid_products_list' %}">My Bids Products</a>
               </li>
 

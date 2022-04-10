@@ -98,8 +98,8 @@
             
             
               
-              <input type="text" class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
-              <input type="text" class="form-control" id="com_user_id" name="com_user_id" value="{{ user.company.id }}" placeholder="{{ user.company.id }}">
+              <input type="hidden" class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
+              <input type="hidden" class="form-control" id="com_user_id" name="com_user_id" value="{{ user.company.id }}" placeholder="{{ user.company.id }}">
               <input type="number" name="bid_price" class="form-control" placeholder="Enter your bid">
             
           

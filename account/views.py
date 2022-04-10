@@ -83,7 +83,7 @@ def handleLogin(request):
         
         if user is not None:
             login(request, user)
-            messages.success(request, "Successfuly logged in 🥰")
+            # messages.success(request, "Successfuly logged in 🥰")
             user_type = user.user_type
             print(user_type)
             #print("username : "+ request.POST.get("loginusername")+ "Password: " +request.POST.get("loginpassword"))
@@ -95,7 +95,7 @@ def handleLogin(request):
             elif user_type == '2':
                 customer_exist = Customer.objects.filter(user=user).exists()
                 if customer_exist:
-                    messages.success(request,"Customer home !")
+                    messages.success(request,f"Welcome {user.username} to Bid 'N Build !")
                     return redirect(views.homeView)
 
                 return redirect('add_customer')
@@ -103,7 +103,7 @@ def handleLogin(request):
             elif user_type == '3':
                 company_exist = Company.objects.filter(user=user).exists()
                 if company_exist:
-                    messages.success(request,"Company Login Successful !")
+                    messages.success(request,f"Welcome {user.username} to Bid 'N Build !")
                     return redirect(views.all_product_details)
                 return redirect('add_company')
         else:

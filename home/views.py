@@ -200,7 +200,8 @@ def add_bid(request):
                     bid_status=bid
                 
                 except Exception as e:
-                    messages.error(request,e)
+                    pass
+                    # messages.error(request,e)
                 if bid_status==None:
                     try:
                         bid_model = Bid(product=product, company=company, bid_price=bid_price)

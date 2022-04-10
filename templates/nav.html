@@ -14,9 +14,9 @@
             <li class="nav-item mx-2">
               <a class="nav-link {% block productactive %}{% endblock productactive %}" href="/all-product-details">Listings</a>
             </li>
-
+            
              <!-- <li class="nav-item mx-2">
-              <a class="nav-link {% block registeractive %}{% endblock registeractive %}" href="{% url 'register' %}">Register</a>
+              <
             
             
 
@@ -92,22 +92,24 @@
                             <input type="hidden" name="value">
                         </div>
 
-                        <button class="dropdown-item" type="submit"><i class="bi bi-box-arrow-left m-2"></i> Logout</button>
+                        <button class="dropdown-item" type="submit">Logout</button>
                     </form>
-                    <button class="dropdown-item" type="button"><a href="{% url 'view_profile' %}" style="background-color: none;"><i class="bi bi-person-circle m-2"></i> View Profile</a> </button> 
+                    
+                     <a class="dropdown-item" href="{% url 'view_profile' %}">View Profile</a> 
                 </div>
             </li>
         </ul>
 
         {% else %}
         <!-- Button to trigger login modal -->
-        <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#loginModal">
+        {% comment %} <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#loginModal">
             Login
         </button>
         <!-- Button to trigger singup modal -->
         <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#singupModal">
             Sing Up
-        </button> 
+        </button>  {% endcomment %}
+        <a class="nav-link" type="button" class="btn btn-danger mr-2" href="{% url 'register' %}">Register</a>
         {% endif %}
         </div>
       </div>

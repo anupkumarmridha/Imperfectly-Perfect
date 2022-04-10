@@ -38,6 +38,7 @@ def category_details(request,cats):
     context={
         'all_cats_product':all_cats_product,
         'cats_menu' : cats_menu,
+        'category' : category,
     }
     return render(request,'product/category_details.html',context)
 

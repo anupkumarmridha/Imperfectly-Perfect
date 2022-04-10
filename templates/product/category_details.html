@@ -6,6 +6,7 @@
 {% if all_cats_product.count %}
 <div class="container">
   <div class="row gap-3 justify-content-around">
+    <h2 class="text-center">{{category}}  </h2>
     {% for product in all_cats_product %}
       {% if product.order %}
         
@@ -41,7 +42,7 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                 Category:
-                <span class="badge rounded-pill" style="background-color: #4484ce;">Clothings</span>
+                <span class="badge rounded-pill" style="background-color: #4484ce;">{{product.category}}</span>
                 </li>
             </ul>
             

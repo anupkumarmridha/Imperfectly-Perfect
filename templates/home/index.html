@@ -11,7 +11,7 @@
 {% block body %} 
 <div class="compL d-flex " style="display: block;justify-content: end;"><img src="../static/img/logonew (2).png" alt="Bid N' Build"  class="mx-auto" style="height:17rem; width:auto;"></div>
 <div class="d-flex flex-column align-items-end land-form" style="position: relative;bottom: 0rem;" > 
-        <div class="d-block  mx-5 my-2" ><a href="{% url 'add_product' %} " type="button" id="add-prod" class="btn-sm p-3 {% block addProductActive %}{% endblock addProductActive %}" ><i class="bi bi-bag-plus"></i> Add an Item/service</a>
+        <div class="d-block mx-5 my-2" ><a href="{% url 'add_product' %} " type="button" id="add-prod" class="btn-sm p-3 {% block addProductActive %}{% endblock addProductActive %}" ><i class="bi bi-bag-plus"></i> Add an Item/service</a>
                 <h5 class="rounded-pill p-2 text-white text-center" style=" background-color: #f19f4d; position: relative; left: 12rem; bottom: 1rem; width: 11rem; border: 4px solid #D9D9D9;">For Customers</h5>
         </div>
         <div class="d-block  mx-5 my-2"><a href="/all-product-details " type="button"  id="bid-prod" class="btn-sm p-3 mx-1 {% block productactive %}{% endblock productactive %}" ><i class="bi bi-cash-coin"></i> Bid on Item/service</a>

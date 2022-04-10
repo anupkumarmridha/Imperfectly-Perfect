@@ -8,14 +8,14 @@
 
 <small>
     By: {{ product.author.user.username }}
-    {% if product.author.profile_pic %}
-    <img src="{{ product.author.profile_pic.url }}" class="rounded-circle"  width=75 height=75>
+        {% if product.author.profile_pic %}
+        <img src="{{ product.author.profile_pic.url }}" class="rounded-circle"  width=75 height=75>
 
-    {% else %}
-    
-        <img src="{% static 'img/avatar.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
+        {% else %}
         
-    {% endif %}
+            <img src="{% static 'img/avatar.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
+            
+        {% endif %}
     <br> 
     Tag: {{ product.category }} 
     <br>
@@ -26,7 +26,6 @@
 <hr>
 
 
-{% endif %}
 <br>
 
 {{ product.desc|safe }}

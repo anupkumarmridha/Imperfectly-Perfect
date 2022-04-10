@@ -93,9 +93,9 @@ def all_product_details(request):
     all_products=Product.objects.all()
     # context['all_products']=all_products
     product_id=request.GET.get('product_id')
-    for i in all_products:
-        i.order=False
-        i.save()
+    # for i in all_products:
+    #     i.order=False
+    #     i.save()
 
 
     # all_bids=Bid.objects.all()
@@ -172,8 +172,11 @@ def bid_details(request):
     try:
         pk=Customer.objects.get(user=request.user)
         all_posted_product=Product.objects.filter(author=pk).order_by('created_at')
+        cats_menu=Category.objects.all()
+
         context={
-            'all_posted_product':all_posted_product,             
+            'all_posted_product' : all_posted_product,
+            'cats_menu' : cats_menu,          
             }
         return render(request,'product/bid_details.html',context)
     except:

@@ -15,7 +15,12 @@ urlpatterns = [
   path('/customer-home', views.customer_home, name='customer_home'),
   path('/company-home', views.company_home, name='company_home'),
 
+  path('view_profile', views.view_profile, name='view_profile'),
+  
+
+
   #CRUD Customer profile
+
   path("add-customer", views.add_customer, name='add_customer'),
   path("add-profile-details/<int:id>", views.add_customer_profile_details, name='add_customer_profile_details'),
   path("view-all-customer-profile/", views.view_all_customer_profile, name='view_all_customer_profile'),

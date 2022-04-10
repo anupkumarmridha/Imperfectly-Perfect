@@ -101,8 +101,12 @@ def handleLogin(request):
                 return redirect('add_customer')
 
             elif user_type == '3':
-                company=Company.objects.get(user=user.id)
-                print(company.company_name)
+                try:
+                    company=Company.objects.get(user=user.id)
+                    print(company.company_name)
+                except:
+                    pass
+                
                 company_exist = Company.objects.filter(user=user).exists()
                 if company_exist:
                     messages.success(request,f"Welcome {company.company_name} to Bid 'N Build !")

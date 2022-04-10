@@ -85,42 +85,36 @@ body{
     background-color: white;
 }
 .compL{
-    animation: fadeInDown 8s;
+    animation: fadeInDown 4s;
 }
 .land-form{
-    animation: fadeInUp 8s;
+    animation: fadeInUp 3s;
 }
 @keyframes fadeInDown{
     0%{
         opacity: 0.3;
-        position: absolute;
-        left: 33.5rem;
-        bottom: 50rem;
+        transform: translatey(-20rem);
     }
-    50%{
+    /* 50%{
         opacity: 0.9;
-        position: absolute;
-        left: 34rem;
-        bottom: 26.1rem;
-    }
+        transform: translatey(-13rem);
+    } */
     100%{
         opacity:1;
-        position: static;
+        transform: translatey(0);
     }
 }
 @keyframes fadeInUp{
     0%{
-        opacity: 0.3;
-        position: relative;
-        top: 50rem;
+        opacity: 0;
+        transform: translatey(5rem);
     }
-    50%{
+    /* 50%{
         opacity: 0.9;
-        position: relative;
-        top:17rem
-    }
+        transform: translatey(-13rem);
+    } */
     100%{
         opacity:1;
-        position: static;
+        transform: translatey(0);
     }
 }

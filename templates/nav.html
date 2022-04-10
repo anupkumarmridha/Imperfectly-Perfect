@@ -92,10 +92,10 @@
                             <input type="hidden" name="value">
                         </div>
 
-                        <button class="dropdown-item" type="submit">Logout</button>
+                        <button class="dropdown-item" type="submit"><i class="bi bi-box-arrow-left m-2"></i> Logout</button>
                     </form>
-                    <button class="dropdown-item" type="submit">Your Profile</button>
-                    {% comment %} <a class="dropdown-item" href="{% url 'View_Profile' user.pk %}">View Profile</a> {% endcomment %}
+                    <button class="dropdown-item" type="submit"><i class="bi bi-person-circle m-2"></i> Your Profile</button>
+                    {% comment %} <a class="dropdown-item" href="{% url 'View_Profile' user.pk %}"> View Profile</a> {% endcomment %}
                 </div>
             </li>
         </ul>

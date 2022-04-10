@@ -115,7 +115,7 @@ def add_customer(request):
     customer_exist = Customer.objects.filter(user=user).exists()
     if customer_exist:
         messages.error(request,"Customer Already Registered !")
-        return redirect('customer_home')
+        return redirect(views.homeView)
     # customer_form=AddCustomerForm
     if request.method=='POST':
         gender=request.POST['gender']
@@ -201,14 +201,44 @@ def handleLogout(request):
     else:
         return HttpResponse('Sorry No Users Logged in 😎') 
 
+
+
+
+# Prodfile details
+def view_profile(request):
+    user=request.user
+    user_type=user.user_type
+    context={}
+    print(user_type)
+    if user_type=='2':
+        customer_details=Customer.objects.filter(user=user)
+
+        context={
+            'customer_details':customer_details,
+        }
+        
+    if user_type=='3':
+        company_details=Company.objects.filter(user=user)
+
+        context={
+            'company_details':company_details,
+        }
+
+    # return render(request, 'users/company/view_company_profile.html',context)
+    return render(request, 'users/customer/view_customer_profile.html',context)
+
+
 #...............................profile details customer..........................#
+
+
+
 def add_customer_profile_details(request,id):
     pass
 
 def view_all_customer_profile(request):
     pass
 
-def view_customer_profile(request,id):
+def view_customer_profile(request):
     pass
 
 def update_customer_password(request,id):

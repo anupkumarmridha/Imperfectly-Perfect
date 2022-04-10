@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ user.username }}{% endblock title %}
+{% block body %}
+{% if user.is_authenticated %}
+    <div class='container'>
+        <ul>
+            <h1>{{ user.username }}</h1>
+            <hr>
+            {% if user.profile.profile_pic %}
+            <img src="{{ user.customer.profile_pic.url }}" class="rounded-circle"  width=75 height=75>
+        
+            {% else %}
+            
+                <img src="{% static 'img/avatar.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
+                
+            {% endif %}
+            <br>
+             {{ user.profile.bio }} 
+            <br>
+            <li>Username : {{ user.username }} </li>
+            <li>Name : {{ user.first_name }} {{ user.last_name }} </li>
+            <li>Email : {{ user.email }}</li>
+            
+            <br>
+        </ul>    
+
+            {% comment %} <a href="{% url 'Add_Profile_Details' %}" class="btn btn-primary">Add Details</a>
+            <a href="{% url 'Edit_Profile' %}" class="btn btn-warning">Update</a> {% endcomment %}
+
+          
+
+        <a href="{% url 'homeView' %}" class="btn btn-dark">Back</a>
+
+    </div>
+{% else %}
+    <button type="button" class="btn btn-primary sm mr-2" data-toggle="modal" data-target="#loginModal">Login</button>
+{% endif %}
+
+{% endblock body %}

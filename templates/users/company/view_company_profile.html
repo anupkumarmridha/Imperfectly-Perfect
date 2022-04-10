@@ -1,0 +1,238 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Your Profile{% endblock title %} 
+
+
+{% block body %} 
+
+
+
+
+<link rel="stylesheet" href="{% static "css/company_profile_style.css" %}">
+{% if user.is_authenticated %}
+<!-- -----------------------------------Profile Section start----------------------------------- -->
+{% for comany in company_details %}
+<div class="container emp-profile shadow-lg bg-body">
+    <form method="post">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="profile-img">
+            <!----------company logo---------->
+            {% if comany.profile_pic %}
+            <img src="{{comany.profile_pic.url}}" alt="" class="rounded d-md-flex justify-content-md-start" />
+            {% else %}
+            
+                <img src="{% static 'img/avatar.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
+                
+            {% endif %}
+          </div>
+        </div>
+
+        <!----------Header of the profile section start---------->
+        <div class="col-md-6">
+          <div class="profile-head">
+            <h5>
+             {{comany.company_name}}
+            </h5>
+            <h6>
+              Category  
+            </h6>
+            <p class="proile-rating">RATINGS : <span>8/10</span></p>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="info-tab" data-bs-toggle="tab" href="#home" role="tab"
+                  aria-controls="home" aria-selected="true">Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="contact-info" data-bs-toggle="tab" href="#profile" role="tab"
+                  aria-controls="profile" aria-selected="false">Connect with us</a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <a href="#">
+            <button type="button" class="btn btn-primary">Edit Profile</button>
+          </a>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-4">
+          <div class="p-2 fw-bold d-flex justify-content-around flex-md-column">
+            <a><strong>Last Update: <p>10/04/22</p></strong></p>
+            <a><strong>Joined: <p>{{comany.created_at}}</p></strong></a>
+          </div>
+        </div>
+
+        <!----------Header of the profile section end---------->
+
+        <!----------Info section start---------->
+        <div class="col-md-8">
+          <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="info-tab">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>User Name</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{comany.user.username}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>First Name</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{comany.user.first_name}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Last Name</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{comany.user.last_name}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>CIN</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{comany.cin}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>PIN</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{comany.pin}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Address</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{comany.address}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Company Description</label>
+                </div>
+                <!-- <div class="col-md-6">
+                  <p>{{comany.company_desc}}</p>
+                </div> -->
+                <div class="col-md-6">
+                  <p class="text-success" type="button" data-toggle="collapse" data-target="#company_description" aria-expanded="false" aria-controls="company_description">
+                    View Description
+                  </p>
+                </div>
+                <div class="collapse" id="company_description">
+                  <div class="card card-body">
+                    {{comany.company_desc}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Since</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{comany.since}}</p>
+                </div>
+              </div>
+            </div>
+            <!----------Info section end---------->
+
+
+
+
+
+            <!----------Connect with us section start---------->
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="contact-info">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Email</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{comany.user.email}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Phone</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{comany.phone}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Website</label>
+                </div>
+                <div class="col-md-6">
+                  <a class="text-decoration-none" href="#">
+                    <p>bid-n-build.com</p>
+                  </a>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Facebook</label>
+                </div>
+                <div class="col-md-6">
+                  <a class="text-decoration-none" href="#">
+                    <p>@Bid_N'_Build</p>
+                  </a>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Twitter</label>
+                </div>
+                <div class="col-md-6">
+                  <a class="text-decoration-none" href="#">
+                    <p>@Bid_N'_Build</p>
+                  </a>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Instagram</label>
+                </div>
+                <div class="col-md-6">
+                  <a class="text-decoration-none" href="#">
+                    <p>@Bid_N'_Build</p>
+                  </a>
+                </div>
+              </div>
+
+              <!----------Connect with us section end---------->
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  {% endfor %}
+  {% endif %}
+{% endblock body %}

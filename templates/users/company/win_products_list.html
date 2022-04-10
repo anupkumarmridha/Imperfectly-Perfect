@@ -50,15 +50,15 @@
                               </li>
                           </ul>
                           <div class="mx-auto">
-                              <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}" style="background-color: #f9cf00; border:0px">
+                              <!-- <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}" style="background-color: #f9cf00; border:0px">
                                 <i class="bi bi-info-circle-fill mr-1" ></i>Info
-                              </button> 
+                              </button>  -->
                               {% if user.is_authenticated %}
                               {% if user.company %}
                               {% comment %} <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}">
                                   Submit Bid
                               </button> {% endcomment %}
-                              <a href=" {% url 'add_order_details' bid.pk %}" type="button" class="btn btn-primary btn-sm-center">
+                              <a href=" {% url 'add_order_details' bid.pk %}" type="button" class="btn btn-primary m-2">
                                 Manage Order
                               </a>
                               {% else %}

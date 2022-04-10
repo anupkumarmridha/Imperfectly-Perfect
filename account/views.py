@@ -140,7 +140,7 @@ def add_customer(request):
             customer.profile_pic=profile_pic
             customer.save()
             messages.success(request,"Successfuly register as a Customer")
-            return redirect('customer_home')
+            return redirect(views.homeView)
         except Exception as e:
             print(e)
             messages.error(request,e)
@@ -153,7 +153,7 @@ def add_company(request):
     company_exist = Company.objects.filter(user=user).exists()
     if company_exist:
         messages.error(request,"Customer Already Registered !")
-        return redirect('customer_home')
+        return redirect(views.homeView)
     # customer_form=AddCustomerForm
     if request.method=='POST':
         company_name=request.POST['company_name']
@@ -183,7 +183,7 @@ def add_company(request):
             company.profile_pic=profile_pic
             company.save()
             messages.success(request,"Successfuly register as a Company")
-            return redirect('company_home')
+            return redirect(views.homeView)
         except Exception as e:
             print(e)
             messages.error(request,e)

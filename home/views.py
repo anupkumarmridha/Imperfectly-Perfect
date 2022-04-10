@@ -34,8 +34,10 @@ def add_category(request):
 def category_details(request,cats):
     category=Category.objects.get(name=cats)
     all_cats_product=Product.objects.filter(category=category)
+    cats_menu=Category.objects.all()
     context={
         'all_cats_product':all_cats_product,
+        'cats_menu' : cats_menu,
     }
     return render(request,'product/category_details.html',context)
 
@@ -97,10 +99,13 @@ def all_product_details(request):
 
 
     # all_bids=Bid.objects.all()
-    
+    cats_menu=Category.objects.all()
+    for i in cats_menu:
+        print(i)
     print(product_id)
     context={
         'all_products':all_products,
+        'cats_menu': cats_menu,
         # 'all_bids':all_bids,
     }
     return render(request,'product/view_all_product.html', context)
@@ -273,6 +278,7 @@ def company_rating(request, pk):
 
 def add_order_details(request,pk):
     bid=Bid.objects.get(id=pk)
+    cats_menu=Category.objects.all()
     # print(bid.id)
     # print(bid.product.author.address)
     if request.method=='POST':
@@ -293,6 +299,7 @@ def add_order_details(request,pk):
   
     context={
         'bid':bid,
+        'cats_menu':cats_menu,
     }
     
     return render(request,'orders/add_order_details.html',context)
@@ -332,8 +339,10 @@ def view_order_details(request,pk):
     bid=Bid.objects.get(id=pk)
     all_order=Order.objects.filter(bid=bid.id)
     print(bid.bid_price)
+    cats_menu=Category.objects.all()
     context={
         'bid':bid,
         'all_order':all_order,
+        'cats_menu':cats_menu,
     }
     return render(request,'orders/view_order_details.html',context)

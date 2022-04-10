@@ -224,8 +224,8 @@ def view_profile(request):
             'company_details':company_details,
         }
 
-    # return render(request, 'users/company/view_company_profile.html',context)
-    return render(request, 'users/customer/view_customer_profile.html',context)
+    
+    return render(request, 'users/company/view_company_profile.html',context)
 
 
 #...............................profile details customer..........................#
@@ -275,14 +275,19 @@ def delete_company_profile(request,id):
 
 def win_products_list(request):
     all_products=Product.objects.all()
+    cats_menu=Category.objects.all()
     context={
-        'all_products':all_products
+        'all_products':all_products,
+        'cats_menu' : cats_menu,
     }
     return render(request, 'users/company/win_products_list.html',context)
 
 def bid_products_list(request):
     all_products=Product.objects.all()
+    cats_menu=Category.objects.all()
     context={
-        'all_products':all_products
+        'all_products':all_products,
+        'cats_menu' : cats_menu,
     }
+    
     return render(request, 'users/company/bid_products_list.html',context)

@@ -26,6 +26,8 @@
     <title>{% block title %}{% endblock title %}</title>
   </head>
   <body>
+    {% for cats in cats_menu %}
+    {% endfor %}
     <!--Navbar -->
     {% include 'nav.html' %}
     <!--End Navbar -->

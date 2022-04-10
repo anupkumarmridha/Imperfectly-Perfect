@@ -91,12 +91,12 @@ class ProductDetailsView(DetailView):
     template_name='product/product_details.html'
 
 def all_product_details(request):
-    all_products=Product.objects.all()
+    all_products=Product.objects.all().order_by('-created_at')
     # context['all_products']=all_products
     product_id=request.GET.get('product_id')
-    for i in all_products:
-        i.order=False
-        i.save()
+    # for i in all_products:
+    #     i.order=False
+    #     i.save()
 
 
     # all_bids=Bid.objects.all()

@@ -2,55 +2,71 @@
 {% load static %}
 {% block title %}{{ product.title }}{% endblock title %}
 {% block body %}
-<div class="container my-5 bg-white rounded-3 p-3">
-    <h2 class="text-center">{{ product.title }}</h2>
+<h1 class="text-center">{{ product.title }}</h1>
+<div class="container my-5 bg-white rounded-3 p-3 shadow">
+    
 
 
-<small>
-    By: {{ product.author.user.username }}
+<div>
+    
     {% if product.author.profile_pic %}
-    <img src="{{ product.author.profile_pic.url }}" class="rounded-circle"  width=75 height=75>
+    <img src="{{ product.author.profile_pic.url }}" class="rounded-circle mx-auto d-block"  width=75 height=75>
+    <p class="text-center">From: {{ product.author.user.username }}</p>
 
     {% else %}
     
-        <img src="{% static 'img/avatar.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
+        <img src="{% static 'img/avatar.jpg' %}" alt="Avatar"  class="rounded-circle mx-auto d-block"  width=75 height=75>
+        <p class="text-center">From: {{ product.author.user.username }}</p>
+        
         
     {% endif %}
-    <br> 
-    Tag: {{ product.category }} 
+  
+    <p class="text-center">Category: <span class="badge bg-primary text-wrap" style="letter-spacing: 1px;"> {{ product.category }} </span></p> 
+     
     <br>
-    Posted : {{ product.created_at }} <br>Last update : {{ product.updated_at }}
-    <br>
-</small>
+    <div class="d-flex flex-column flex-md-row justify-content-md-evenly">
+        <div>
+            Posted : {{ product.created_at }} 
+        </div> 
+        
+        <div>
+            Last update : {{ product.updated_at }}
+        </div>
+    </div>
+    
+</div>
 
 <hr>
-
-
+{% if product.product_image.url %}
+<div class="d-flex">
+<img src=" {{ product.product_image.url }} ">
+<div>
+<h2>Product Description</h2>
+<span>{{ product.desc|safe }}</span>
+</div>
+</div>
 {% endif %}
 <br>
 
-{{ product.desc|safe }}
+
 
 <br>
 <hr>
 
 <!--This is for Bid Price-->
-<small> Price {{ product.price }} Rs </small>
+<div class="d-flex flex-column flex-md-row justify-content-md-evenly">
+<p> <strong>Price:</strong> <span class="badge bg-success" style="letter-spacing: 1px;"> ₹ {{ product.price }} </span></p>
 <br>
-<small> Total Bids {{ product.bids.all.count }} </small>
-<br>
+<p> <strong>Total Bids</strong> <span class="badge bg-dark" style="letter-spacing: 1px;">{{ product.bids.all.count }}</span>  </p>
+</div>
 <br>
     {% if not product.bids.all %}
     
     
     <small>Make Your First Bid</small>
 
-    {% else %}
-    <small> Bids :
-    {% for bid in product.bids.all  %}
-     ₹ {{ bid.bid_price }}
-    {% endfor %}
-</small>
+    
+
     {% endif %}
 
 {% if user.is_authenticated %}

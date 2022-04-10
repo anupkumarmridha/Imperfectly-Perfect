@@ -14,7 +14,7 @@
             {% else %}
             {% for bid in product.bids.all %}                
                   {% if bid.company.user.id == user.id %}
-                      <div class="card col-3 m-4 cardcss" style="width: 18rem;">
+                      <div class="card col-3 m-4 cardcss shadow" style="width: 18rem;">
                          
                           {% if product.product_image %}
                           <img src=" {{ product.image_url|default_if_none:'#' }} " class="card-img-top p-2" alt="..." width="320" height="180">
@@ -33,7 +33,7 @@
                           <ul class="list-group">
                               <li class="list-group-item d-flex justify-content-between align-items-center">
                               Author
-                              <span class="badge bg-success rounded-pill">{{ product.author }}</span>
+                              <span class="text-dark fw-bold">{{ product.author }}</span>
                               </li>
 
                               <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -54,17 +54,17 @@
                           </ul>
                           
                           <div class="mx-auto">
-                              <button type="button" class="btn btn-dark m-2" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}" style="background-color: #f9cf00; border:0px">
+                              <button type="button" class="btn fw-bold m-2" data-bs-toggle="modal" data-bs-target="#product_{{product.pk}}" style="background-color: #3DD1E7; border:0px">
                               <i class="bi bi-info-circle-fill mr-1" ></i>Info
                               </button>
                               {% if user.is_authenticated %}
                               {% if user.company %}
-                              <button type="button" class="btn btn-dark m-2" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}" style="background-color: #f19f4d;border:0px">
+                              <button type="button" class="btn text-white fw-bold m-2" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}" style="background-color: #405cf5;border:0px">
                                   Submit Bid
                               </button>
                               {% endif %}
                               {% else %}
-                              <button type="button" class="btn btn-dark m-2" data-bs-toggle="modal" data-bs-target="#loginModal" style="background-color: #f19f4d;border:0px">
+                              <button type="button" class="btn text-white fw-bold m-2" data-bs-toggle="modal" data-bs-target="#loginModal" style="background-color: #405cf5;border:0px">
                                   Submit Bid
                               </button>
                           {% comment %} {% endif %} {% endcomment %}

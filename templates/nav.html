@@ -102,14 +102,14 @@
 
         {% else %}
         <!-- Button to trigger login modal -->
-        {% comment %} <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#loginModal">
+       <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#loginModal">
             Login
         </button>
         <!-- Button to trigger singup modal -->
         <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#singupModal">
             Sing Up
-        </button>  {% endcomment %}
-        <a class="nav-link" type="button" class="btn btn-danger mr-2" href="{% url 'register' %}">Register</a>
+        </button>  
+        {% comment %} <a class="nav-link" type="button" class="btn btn-danger mr-2" href="{% url 'register' %}">Register</a> {% endcomment %}
         {% endif %}
         </div>
       </div>

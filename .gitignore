@@ -12,5 +12,5 @@ __pycache__/
 *.pyc
 account/migrations/
 home/migrations/
-bidnbuild/__pycache__/
+Imperfectly-Perfect/__pycache__/
 db.sqlite3

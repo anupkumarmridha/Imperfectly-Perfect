@@ -87,8 +87,13 @@ def product_info(request,pk):
 #     return render(request,'product/product_details.html',product_id)
 
 class ProductDetailsView(DetailView):
-    model=Product
-    template_name='product/product_details.html'
+    model = Product
+    template_name = 'product/product_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cats_menu'] = Category.objects.all()
+        return context
 
 def all_product_details(request):
     all_products=Product.objects.all().order_by('-created_at')
@@ -145,6 +150,11 @@ class update_product(UpdateView):
         pk=Customer.objects.get(user=self.request.user)
         # print(pk)
         return reverse( 'customer_product_list', kwargs={'pk': pk.id})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cats_menu'] = Category.objects.all()
+        return context
 
 
 

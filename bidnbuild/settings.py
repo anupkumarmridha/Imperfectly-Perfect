@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',
-    'ckeditor'
+    'ckeditor',
+    # for production
+    'whitenoise.runserver_nostatic'
 ]
 
 MIDDLEWARE = [
@@ -122,14 +124,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-#added manually
+
+# Define the STATIC_ROOT setting.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Define STATICFILES_DIRS to include additional static directories if needed.
 STATICFILES_DIRS = (
 os.path.join(BASE_DIR,'static'),
 )
 
-#added manually
+# Define the MEDIA_URL and MEDIA_ROOT settings.
 MEDIA_URL="/media/"
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
+
 
 #added manually
 AUTHENTICATION_BACKENDS=['account.EmailBackEnd.EmailBackEnd']

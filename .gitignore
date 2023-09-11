@@ -12,5 +12,6 @@ __pycache__/
 *.pyc
 account/migrations/
 home/migrations/
-Imperfectly-Perfect/__pycache__/
+bildnbuild/__pycache__/
 db.sqlite3
+staticfiles

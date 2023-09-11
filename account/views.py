@@ -11,6 +11,9 @@ from django.core.files.storage import FileSystemStorage
 from home import views 
 from home.models import Product,Category
 # Create your views here.
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.views import PasswordResetView
+from django.http import Http404
 
 # category
 context={}
@@ -233,6 +236,18 @@ def view_profile(request):
     
     return render(request, 'users/company/view_company_profile.html',context)
 
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'password_reset.html'
+    form_class = PasswordResetForm
+
+    def form_valid(self, form):
+        # Check if the user with the provided email exists
+        email = form.cleaned_data.get('email')
+        if not User.objects.filter(email=email).exists():
+            return HttpResponse("User with this email does not exist")
+
+        # If the user exists, proceed with the password reset process
+        return super().form_valid(form)
 
 #...............................profile details customer..........................#
 

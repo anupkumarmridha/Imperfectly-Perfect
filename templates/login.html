@@ -25,9 +25,23 @@
                             placeholder="Enter your password " autocomplete="loginpassword" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <form>
+                                    <!-- Your form fields here -->
+                                    <button type="submit" class="btn btn-primary btn-block mt-3">Submit</button>
+                                </form>
+                                <div class="text-center mt-3">
+                                    <a href="{% url 'password_reset' %}" class="text-muted">Forgot Password?</a>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <a href="" data-toggle="modal" data-target="#singupModal" class="text-muted">Don't Have an Account?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <a href="" data-toggle="modal" data-target="#singupModal" >Don't Have an Account?<span class="sr-only">(current)</span></a>
                 </form>
             </div>
             

@@ -1,0 +1,8 @@
+env
+db.sqlite3
+account/migrations
+home/migrations
+account/__pycache__
+home/__pycache__
+bidnbuild/__pycache__
+

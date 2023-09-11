@@ -1,7 +1,7 @@
 from email import message
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse_lazy, reverse
-from sympy import product
+
 from account.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from account.models import Company, Customer, User
